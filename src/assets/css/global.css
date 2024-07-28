@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body,div,header,el-header{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 14px;
+}
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.w-e-text img {
+    width: 100% !important;
+}
+
+.card {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.line1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.topline {
+    white-space: nowrap;
+    overflow: hidden;
+    min-height:15px;
+    text-overflow: ellipsis;
+    border-radius: 5px; /* 圆角大小为5px */
+}
+.topline:hover {
+    white-space: nowrap;
+    overflow: hidden;
+    min-height:15px;
+    text-overflow: ellipsis;
+    border-radius: 5px; /* 圆角大小为5px */
+    background: rgb(30, 128, 255);
+}
+.top-text{
+    color: #666;
+}
+.top-text:hover{
+    color: #fff;
+}
+.line2 {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* 超出几行省略 */
+    overflow: hidden;
+}

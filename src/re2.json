@@ -1,0 +1,32 @@
+[
+    {
+      "code": 61,
+      "msg": "consequat",
+      "data": {
+        "groups": [
+          {
+            "id": 66,
+            "nickname": "苏州六人小分队",
+            "image_url": "/src/images/td.png",
+            "unread_count": 0
+          }
+        ]
+      }
+    },
+    {
+      "code": 12,
+      "msg": "consequat",
+      "data": {
+        "groups": [
+          {
+            "id": 67,
+            "nickname": "软工小组",
+            "image_url": "/src/images/td.png",
+            "unread_count": 9
+          }
+        ]
+      }
+    }
+  ]
+  
+  
