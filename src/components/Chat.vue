@@ -2,16 +2,9 @@
   <div class="container flex flex-col relative">
     <div class="container p-10 flex flex-row items-center h-fit sticky">
       <div class="avatar-container">
-        <router-link
-          v-if="$store.state.current.id && $store.state.current.image_url"
-          :to="currentRoute"
-          class="hover:text-blue-800"
-        >
-          <img
-            :src="$store.state.current.image_url"
-            alt="User Avatar"
-            class="avatar-image cursor-pointer"
-          />
+        <router-link v-if="$store.state.current.id && $store.state.current.image_url" :to="currentRoute"
+          class="hover:text-blue-800">
+          <img :src="$store.state.current.image_url" alt="User Avatar" class="avatar-image cursor-pointer" />
         </router-link>
         <img v-else :src="localAvatar" alt="User Avatar" class="avatar-image">
       </div>
@@ -22,21 +15,14 @@
         <Message :message="message" />
       </div>
     </div>
-    <div
-      v-if="$store.state.current.type !== 'notice' && $store.state.current.type !== 'invitation'"
-      class="container bg-slate-50 mt-6 p-5 h-fit absolute bottom-0"
-    >
+    <div v-if="$store.state.current.type !== 'notice' && $store.state.current.type !== 'invitation'"
+      class="container bg-slate-50 mt-6 p-5 h-fit absolute bottom-0">
       <form @submit.prevent="sendMessage">
-        <input
-          v-model="input"
+        <input v-model="input"
           class="bg-white border border-l-2 rounded-s-full py-2 border-slate-200 text-black focus:outline-none w-11/12"
-          type="text"
-          placeholder="Type a new message"
-        />
-        <button
-          type="submit"
-          class="text-white bg-zinc-800 border border-l-2 border-slate-200 w-1/12 rounded-e-full py-2 active:bg-zinc-700"
-        >
+          type="text" placeholder="Type a new message" />
+        <button type="submit"
+          class="text-white bg-zinc-800 border border-l-2 border-slate-200 w-1/12 rounded-e-full py-2 active:bg-zinc-700">
           <i class="fa-solid fa-paper-plane"></i>
         </button>
       </form>

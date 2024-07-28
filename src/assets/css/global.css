@@ -2,13 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body,div,header,el-header{
+html,
+body,
+div,
+header,
+el-header {
     margin: 0;
     padding: 0;
 }
+
 body {
     font-size: 14px;
 }
+
 a {
     color: #333;
     text-decoration: none;
@@ -30,32 +36,40 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .topline {
     white-space: nowrap;
     overflow: hidden;
-    min-height:15px;
+    min-height: 15px;
     text-overflow: ellipsis;
-    border-radius: 5px; /* 圆角大小为5px */
+    border-radius: 5px;
+    /* 圆角大小为5px */
 }
+
 .topline:hover {
     white-space: nowrap;
     overflow: hidden;
-    min-height:15px;
+    min-height: 15px;
     text-overflow: ellipsis;
-    border-radius: 5px; /* 圆角大小为5px */
+    border-radius: 5px;
+    /* 圆角大小为5px */
     background: rgb(30, 128, 255);
 }
-.top-text{
+
+.top-text {
     color: #666;
 }
-.top-text:hover{
+
+.top-text:hover {
     color: #fff;
 }
+
 .line2 {
     word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 超出几行省略 */
+    -webkit-line-clamp: 2;
+    /* 超出几行省略 */
     overflow: hidden;
 }

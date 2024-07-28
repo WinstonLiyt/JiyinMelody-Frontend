@@ -7,7 +7,7 @@ const userInfo = "userInfo"
 //获取用户登录信息
 export function getuserInfo() {
   const user = Cookies.get(userInfo)
-  if(user){
+  if (user) {
     return JSON.parse(user)
   }
   return ''
