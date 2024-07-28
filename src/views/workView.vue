@@ -9,7 +9,7 @@
                 <router-link :to="{ name: 'blogdetail', params: { blogid: item.id } }" target="_blank">
                   <div class="blog-title">{{ item.title }}</div>
                 </router-link>
-                
+
                 <div class="line1">{{ item.content }}</div>
 
                 <div class="blog-footer">
@@ -19,10 +19,12 @@
                     <span><i class="el-icon-star-off"></i> {{ item.collect_count }}</span>
                   </div>
                   <div class="blog-actions">
-                    <el-tag v-for="(tag, index) in item.tags" :key="index" type="primary" class="blog-tag">{{ tag }}</el-tag>
+                    <el-tag v-for="(tag, index) in item.tags" :key="index" type="primary" class="blog-tag">{{ tag
+                    }}</el-tag>
                     <div>
                       <el-button type="primary" size="mini" icon="el-icon-edit" @click="editBlog(item.id)">编辑</el-button>
-                      <el-button type="danger" size="mini" icon="el-icon-delete" @click="deleteBlog(item.id)">删除</el-button>
+                      <el-button type="danger" size="mini" icon="el-icon-delete"
+                        @click="deleteBlog(item.id)">删除</el-button>
                     </div>
                   </div>
                 </div>
@@ -31,11 +33,7 @@
           </div>
         </div>
 
-        <el-empty
-          v-if="total === 0"
-          :image-size="250"
-          description="暂未发表任何新闻"
-        ></el-empty>
+        <el-empty v-if="total === 0" :image-size="250" description="暂未发表任何新闻"></el-empty>
       </div>
     </div>
   </div>
@@ -68,7 +66,7 @@ export default {
 
   methods: {
     getownblog() {
-      getownblog({user_id:this.id}).then(response => {
+      getownblog({ user_id: this.id }).then(response => {
         console.log(response.data);
         if (response.data.code === 200) {
           this.blogs = response.data.data.blogs;
@@ -80,15 +78,15 @@ export default {
           this.$message.error(response.data.msg);
         }
       })
-      .catch(error => {
-        // 处理请求失败的逻辑
-        console.error('请求失败:', error);
-      });
+        .catch(error => {
+          // 处理请求失败的逻辑
+          console.error('请求失败:', error);
+        });
     },
     editBlog(blogId) {
       // 处理编辑博客的逻辑
       console.log("编辑博客,博客ID: ", blogId);
-      this.$router.push({name: "editblog", params: {blogid: blogId}});
+      this.$router.push({ name: "editblog", params: { blogid: blogId } });
       // 这里可以添加跳转到编辑页面的逻辑
     },
 
@@ -96,14 +94,14 @@ export default {
       // 处理删除博客的逻辑
       console.log("删除博客,博客ID: ", blogId);
       // 这里可以添加实际的删除逻辑
-      deletblogs({blog_id:blogId}).then(response => { 
-          if (response.data.code === 200) {
-            console.log("ok")
-            this. getownblog() 
-          } else {
-            this.$message.error(response.data.msg);
-          }
-        })
+      deletblogs({ blog_id: blogId }).then(response => {
+        if (response.data.code === 200) {
+          console.log("ok")
+          this.getownblog()
+        } else {
+          this.$message.error(response.data.msg);
+        }
+      })
         .catch(error => {
           // 处理请求失败的逻辑
           console.error('请求失败:', error);

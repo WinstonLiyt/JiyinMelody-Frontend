@@ -6,20 +6,12 @@
       <div style="display: flex; align-items: flex-start; grid-gap: 10px">
         <div>
           <div style="width: 150px" class="card fixed-content">
-            <div
-              class="category-item"
-              :class="{ 'category-item-active': '全部活动' === current }"
-              @click="selectCategory('全部活动')"
-            >
+            <div class="category-item" :class="{ 'category-item-active': '全部活动' === current }"
+              @click="selectCategory('全部活动')">
               全部活动
             </div>
-            <div
-              class="category-item"
-              :class="{ 'category-item-active': item.name === current }"
-              v-for="(item, index) in types"
-              :key="index"
-              @click="selectCategory(item.name)"
-            >
+            <div class="category-item" :class="{ 'category-item-active': item.name === current }"
+              v-for="(item, index) in types" :key="index" @click="selectCategory(item.name)">
               {{ item.name }}
             </div>
             <div class="category-item" v-if="user.is_staff">
@@ -33,68 +25,48 @@
         <div style="flex: 1">
           <div>
             <div class="card" style="min-height: 80vh">
-              <div
-                class="activity-box"
-                v-for="(item, index) in activities"
-                :key="index"
-                v-if="total > 0 && checkShow(item)"
-              >
+              <div class="activity-box" v-for="(item, index) in activities" :key="index"
+                v-if="total > 0 && checkShow(item)">
                 <div style="flex: 1; width: 0">
-                  <router-link
-                    :to="{
-                      name: 'activitydetail',
-                      params: {
-                        activityid: item.id,
-                        out_dated: !checkTime(item),
-                      },
-                    }"
-                    target="_blank"
-                    ><div class="activity-title">
+                  <router-link :to="{
+                    name: 'activitydetail',
+                    params: {
+                      activityid: item.id,
+                      out_dated: !checkTime(item),
+                    },
+                  }" target="_blank">
+                    <div class="activity-title">
                       {{ item.title }}
-                    </div></router-link
-                  >
+                    </div>
+                  </router-link>
 
-                  <div
-                    class="line1"
-                    style="color: #666; margin-bottom: 10px; font-size: 13px"
-                  >
+                  <div class="line1" style="color: #666; margin-bottom: 10px; font-size: 13px">
                     {{ item.description }}
                   </div>
                   <div style="display: flex; align-items: center">
                     <div style="flex: 1; font-size: 13px">
-                      <span style="color: #666; margin-right: 30px"
-                        ><i class="el-icon-circle-check"></i>
-                        {{ formatDate(item.create_at) }}</span
-                      >
-                      <span style="color: #666; margin-right: 30px"
-                        ><i class="el-icon-circle-close"></i>
-                        {{ formatDate(item.end_at) }}</span
-                      >
-                      <span
-                        v-if="checkTime(item)"
-                        style="color: #666; margin-right: 30px"
-                        ><i class="el-icon-loading" style="color: blue"></i>
+                      <span style="color: #666; margin-right: 30px"><i class="el-icon-circle-check"></i>
+                        {{ formatDate(item.create_at) }}</span>
+                      <span style="color: #666; margin-right: 30px"><i class="el-icon-circle-close"></i>
+                        {{ formatDate(item.end_at) }}</span>
+                      <span v-if="checkTime(item)" style="color: #666; margin-right: 30px"><i class="el-icon-loading"
+                          style="color: blue"></i>
                         正在进行中
                       </span>
-                      <span
-                        v-if="!checkTime(item)"
-                        style="color: #666; margin-right: 30px"
-                        ><i class="el-icon-error" style="color: red"></i>
+                      <span v-if="!checkTime(item)" style="color: #666; margin-right: 30px"><i class="el-icon-error"
+                          style="color: red"></i>
                         已结束
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                v-if="total === 0"
-                style="
+              <div v-if="total === 0" style="
                   padding: 20px;
                   text-align: center;
                   font-size: 16px;
                   color: #666;
-                "
-              >
+                ">
                 暂无数据
               </div>
             </div>
@@ -114,42 +86,27 @@
           </div> -->
 
           <div class="card" style="margin-bottom: 10px">
-            <div
-              style="
+            <div style="
                 display: flex;
                 align-items: center;
                 padding-bottom: 10px;
                 border-bottom: 1px solid #ddd;
-              "
-            >
+              ">
               <div style="font-size: 20px; flex: 1">热门帖子</div>
-              <div
-                style="font-size: 12px; color: #666; cursor: pointer"
-                @click="refreshtop"
-              >
+              <div style="font-size: 12px; color: #666; cursor: pointer" @click="refreshtop">
                 <i class="el-icon-refresh"></i> 换一换
               </div>
             </div>
             <div>
-              <div
-                v-for="(item, index) in topblogs"
-                :key="index"
-                style="margin: 15px 0"
-                class="topline"
-                v-if="index >= topstart && index < topend"
-              >
-                <router-link
-                  :to="{ name: 'blogdetail', params: { blogid: item.id } }"
-                  target="_blank"
-                >
-                  <span
-                    style="
+              <div v-for="(item, index) in topblogs" :key="index" style="margin: 15px 0" class="topline"
+                v-if="index >= topstart && index < topend">
+                <router-link :to="{ name: 'blogdetail', params: { blogid: item.id } }" target="_blank">
+                  <span style="
                       width: 18px;
                       display: inline-block;
                       text-align: right;
                       margin-right: 10px;
-                    "
-                  >
+                    ">
                     <span style="color: orangered" v-if="index === 0">{{
                       index + 1
                     }}</span>
@@ -375,40 +332,48 @@ export default {
   height: 100%;
   background-color: rgb(223, 223, 223);
 }
+
 .main-content {
   height: 100%;
   width: 80%;
   margin: 5px auto;
 }
+
 .category-item {
   text-align: center;
   padding: 10px 0;
   font-size: 16px;
   cursor: pointer;
 }
+
 .category-item-active {
   background-color: #1890ff;
   color: #fff;
   border-radius: 5px;
 }
+
 .activity-box {
   display: flex;
   grid-gap: 15px;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
 }
+
 .activity-box:first-child {
   padding-top: 0;
 }
+
 .activity-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
   cursor: pointer;
 }
+
 .activity-title:hover {
   color: #2a60c9;
 }
+
 .fixed-content {
   /*表示跟随页面滚动的类*/
 }

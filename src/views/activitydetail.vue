@@ -4,16 +4,10 @@
 
     <div class="main-content">
       <div style="display: flex; align-items: flex-start; grid-gap: 10px">
-        <div
-          style="width: 150px; display: flex; align-items: center"
-          class="card fixed-content"
-          v-if="out_dated == 'false'"
-        >
+        <div style="width: 150px; display: flex; align-items: center" class="card fixed-content"
+          v-if="out_dated == 'false'">
           <div style="margin: auto">
-            <router-link
-              :to="{ name: 'creatework', params: { activityid: activityid } }"
-              target="_blank"
-            >
+            <router-link :to="{ name: 'creatework', params: { activityid: activityid } }" target="_blank">
               <el-button type="primary"> 新建作品 </el-button>
             </router-link>
           </div>
@@ -22,52 +16,33 @@
         <div style="flex: 1">
           <div>
             <div class="card" style="min-height: 80vh">
-              <div
-                class="blog-box"
-                v-for="(item, index) in works"
-                :key="index"
-                v-if="total > 0"
-              >
+              <div class="blog-box" v-for="(item, index) in works" :key="index" v-if="total > 0">
                 <div style="flex: 1; width: 0">
-                  <router-link
-                    :to="{ name: 'blogdetail', params: { blogid: item.id } }"
-                    target="_blank"
-                    ><div class="blog-title">{{ item.title }}</div></router-link
-                  >
+                  <router-link :to="{ name: 'blogdetail', params: { blogid: item.id } }" target="_blank">
+                    <div class="blog-title">{{ item.title }}</div>
+                  </router-link>
 
-                  <div
-                    class="line1"
-                    style="color: #666; margin-bottom: 10px; font-size: 13px"
-                  >
+                  <div class="line1" style="color: #666; margin-bottom: 10px; font-size: 13px">
                     {{ item.content }}
                   </div>
                   <div style="display: flex; align-items: center">
                     <div style="flex: 1; font-size: 13px">
-                      <span style="color: #666; margin-right: 30px"
-                        ><i class="el-icon-user"></i>
-                        {{ item.author.nickname }}</span
-                      >
-                      <span style="color: #666; margin-right: 30px"
-                        ><i class="el-icon-like"></i>
-                        {{ item.like_count }}</span
-                      >
-                      <span style="color: #666; margin-right: 30px"
-                        ><i class="el-icon-star-off"></i>
-                        {{ item.collect_count }}</span
-                      >
+                      <span style="color: #666; margin-right: 30px"><i class="el-icon-user"></i>
+                        {{ item.author.nickname }}</span>
+                      <span style="color: #666; margin-right: 30px"><i class="el-icon-like"></i>
+                        {{ item.like_count }}</span>
+                      <span style="color: #666; margin-right: 30px"><i class="el-icon-star-off"></i>
+                        {{ item.collect_count }}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                v-if="total === 0"
-                style="
+              <div v-if="total === 0" style="
                   padding: 20px;
                   text-align: center;
                   font-size: 16px;
                   color: #666;
-                "
-              >
+                ">
                 暂无数据
               </div>
             </div>
@@ -87,42 +62,27 @@
           </div> -->
 
           <div class="card" style="margin-bottom: 10px">
-            <div
-              style="
+            <div style="
                 display: flex;
                 align-items: center;
                 padding-bottom: 10px;
                 border-bottom: 1px solid #ddd;
-              "
-            >
+              ">
               <div style="font-size: 20px; flex: 1">热门帖子</div>
-              <div
-                style="font-size: 12px; color: #666; cursor: pointer"
-                @click="refreshtop"
-              >
+              <div style="font-size: 12px; color: #666; cursor: pointer" @click="refreshtop">
                 <i class="el-icon-refresh"></i> 换一换
               </div>
             </div>
             <div>
-              <div
-                v-for="(item, index) in topblogs"
-                :key="index"
-                style="margin: 15px 0"
-                class="topline"
-                v-if="index >= topstart && index < topend"
-              >
-                <router-link
-                  :to="{ name: 'blogdetail', params: { blogid: item.id } }"
-                  target="_blank"
-                >
-                  <span
-                    style="
+              <div v-for="(item, index) in topblogs" :key="index" style="margin: 15px 0" class="topline"
+                v-if="index >= topstart && index < topend">
+                <router-link :to="{ name: 'blogdetail', params: { blogid: item.id } }" target="_blank">
+                  <span style="
                       width: 18px;
                       display: inline-block;
                       text-align: right;
                       margin-right: 10px;
-                    "
-                  >
+                    ">
                     <span style="color: orangered" v-if="index === 0">{{
                       index + 1
                     }}</span>
@@ -289,40 +249,48 @@ export default {
   height: 100%;
   background-color: rgb(223, 223, 223);
 }
+
 .main-content {
   height: 100%;
   width: 80%;
   margin: 5px auto;
 }
+
 .category-item {
   text-align: center;
   padding: 10px 0;
   font-size: 16px;
   cursor: pointer;
 }
+
 .category-item-active {
   background-color: #1890ff;
   color: #fff;
   border-radius: 5px;
 }
+
 .blog-box {
   display: flex;
   grid-gap: 15px;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
 }
+
 .blog-box:first-child {
   padding-top: 0;
 }
+
 .blog-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
   cursor: pointer;
 }
+
 .blog-title:hover {
   color: #2a60c9;
 }
+
 .fixed-content {
   /*表示跟随页面滚动的类*/
 }

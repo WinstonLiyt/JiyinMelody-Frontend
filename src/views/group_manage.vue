@@ -3,10 +3,7 @@
 
         <!-- 上方的首页栏 -->
         <el-header style="padding: 0">
-            <div
-                style="height: 60px; background-color: #1e80ff"
-                class="flexcenter"
-            ></div>
+            <div style="height: 60px; background-color: #1e80ff" class="flexcenter"></div>
         </el-header>
 
 
@@ -18,19 +15,15 @@
                         <img src="@/assets/findpass.png" alt="" />
                     </div>
                     <div class="image-container">
-                        <img
-                            style="width: 100px; height: 100px"
-                            :src=  "group.image_url"
-                            alt="Default Image"
-                            class="round-image"
-                        />
+                        <img style="width: 100px; height: 100px" :src="group.image_url" alt="Default Image"
+                            class="round-image" />
                         <div class="left_name" style="display: flex; flex-direction: column;">
                             <div>
                                 <label for="name">群名:</label>
                             </div>
                             <div>
                                 <label for="">{{ group.name }}</label>
-                            </div>   
+                            </div>
                         </div>
 
                     </div>
@@ -42,19 +35,14 @@
                     </div>
                 </div>
 
-                <div class="right_container"  >
+                <div class="right_container">
                     <div class="card">
                         <div class="image-container1" style="max-height: 300px; overflow-y: auto;">
-                            <div v-for="(item, index) in Group_users"
-                                :key="index"
-                                class="image-wrapper">
+                            <div v-for="(item, index) in Group_users" :key="index" class="image-wrapper">
 
-                                <img
-                                    :src="item.image_url"
-                                    alt="Default Image"
-                                    class="rounded-image"
-                                />
-                                <div class="name">{{ item.nickname }} <span v-if="index == 0" class="Group-dot"></span></div>
+                                <img :src="item.image_url" alt="Default Image" class="rounded-image" />
+                                <div class="name">{{ item.nickname }} <span v-if="index == 0" class="Group-dot"></span>
+                                </div>
                             </div>
 
                             <!-- <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
@@ -65,49 +53,30 @@
 
                         </div>
                         <div class="btn_options">
-                                <img
-                                    src="@/assets/addhead.jpg"
-                                    @click="Click_AddUser"
-                                    alt="Default Image"
-                                    class="rounded-image"/>
-                                <img
-                                    v-if="group.is_owner === true"
-                                    src="@/assets/minus.png"
-                                    @click="Click_DeleteUser"
-                                    alt="Default Image"
-                                    class="rounded-image"/>
+                            <img src="@/assets/addhead.jpg" @click="Click_AddUser" alt="Default Image"
+                                class="rounded-image" />
+                            <img v-if="group.is_owner === true" src="@/assets/minus.png" @click="Click_DeleteUser"
+                                alt="Default Image" class="rounded-image" />
                         </div>
-                        <div class = "back" >
+                        <div class="back">
 
-                            <div
-                            style="
+                            <div style="
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                                 margin-top: 20px;
-                            "
-                        >
-                            <el-button
-                                style="margin-top: 20px;"
-                                type="danger"
-                                @click="delete_exit"
-                                > {{ group.is_owner === true ? '解散群聊' : '退出群聊' }}</el-button>
+                            ">
+                                <el-button style="margin-top: 20px;" type="danger" @click="delete_exit"> {{ group.is_owner
+                                    === true ? '解散群聊' : '退出群聊' }}</el-button>
 
                             </div>
-                            <div
-                            style="
+                            <div style="
                                 margin-top: 20px;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-                            "
-                        >
-                            <el-button 
-                            style="border: 5px,red;"
-                            type="primary"
-                            @click="returnGroup"
-                                >返回群聊</el-button
-                            >
+                            ">
+                                <el-button style="border: 5px,red;" type="primary" @click="returnGroup">返回群聊</el-button>
                             </div>
 
                         </div>
@@ -120,12 +89,9 @@
         <el-backtop></el-backtop>
 
 
-        <el-dialog
-            title="修改群信息"
-            :visible.sync="GroupEditFlag"
-            width="30%">
+        <el-dialog title="修改群信息" :visible.sync="GroupEditFlag" width="30%">
 
-            <el-form ref="form" label-width="80px" >
+            <el-form ref="form" label-width="80px">
                 <el-form-item label="新的群名:">
                     <el-input v-model="Edit_group.new_name"></el-input>
                 </el-form-item>
@@ -134,11 +100,12 @@
 
                 <el-form-item label="上传头像" prop="image">
                     <input type="file" ref="fileInput" accept="image/*" @change="handleFileChange" style="display: none">
-                    <el-button type="primary" @click="triggerFileInput">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+                    <el-button type="primary" @click="triggerFileInput">上传<i
+                            class="el-icon-upload el-icon--right"></i></el-button>
                 </el-form-item>
 
                 <div v-if="object.url !== null">
-                    <img :src= "object.url" alt="" />
+                    <img :src="object.url" alt="" />
                 </div>
 
 
@@ -149,36 +116,25 @@
             </el-form>
 
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="Click_UpdateInfo_True"
-                    >确 定</el-button
-                >
+                <el-button type="primary" @click="Click_UpdateInfo_True">确 定</el-button>
                 <el-button @click="Click_UpdateInfo_False">取 消</el-button>
             </span>
         </el-dialog>
 
 
-        <el-dialog
-            title="添加群成员"
-            :visible.sync="AddUserFlag"
-            width="30%">
+        <el-dialog title="添加群成员" :visible.sync="AddUserFlag" width="30%">
 
             <el-form ref="form" label-width="80px">
                 <el-form-item label="群聊人员">
                     <el-select v-model="form_addUser.id" placeholder="请选择群聊人员">
-                        <el-option
-                            v-for="(item, index) in New_users"
-                            :key="index"
-                            :label="item.nickname"
-                            :value="item.id"
-                        ></el-option>
+                        <el-option v-for="(item, index) in New_users" :key="index" :label="item.nickname"
+                            :value="item.id"></el-option>
                     </el-select>
                 </el-form-item>
             </el-form>
 
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="Click_AddUser_True"
-                    >确 定</el-button
-                >
+                <el-button type="primary" @click="Click_AddUser_True">确 定</el-button>
                 <el-button @click="Click_AddUser_False">取 消</el-button>
                 <!-- <el-button @click="AddUserFlag = false, form_addUser.id = fo_user.id, form_addUser.nickname = fo_user.nickname">取 消</el-button> -->
             </span>
@@ -186,28 +142,19 @@
         </el-dialog>
 
 
-        <el-dialog
-            title="减少人员"
-            :visible.sync="DeleteUserFlag"
-            width="30%">
+        <el-dialog title="减少人员" :visible.sync="DeleteUserFlag" width="30%">
 
             <el-form ref="form" label-width="80px">
                 <el-form-item label="群聊人员">
                     <el-select v-model="form_deleteUser.id" placeholder="请选择群聊人员">
-                        <el-option
-                            v-for="(item, index) in Old_users"
-                            :key="index"
-                            :label="item.nickname"
-                            :value="item.id"
-                        ></el-option>
+                        <el-option v-for="(item, index) in Old_users" :key="index" :label="item.nickname"
+                            :value="item.id"></el-option>
                     </el-select>
                 </el-form-item>
             </el-form>
 
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="Click_DeleteUser_True"
-                    >确 定</el-button
-                >
+                <el-button type="primary" @click="Click_DeleteUser_True">确 定</el-button>
                 <el-button @click="Click_DeleteUser_False">取 消</el-button>
                 <!-- <el-button @click="DeleteUserFlag = false, form_deleteUser.id = fo_user.id, form_deleteUser.nickname = fo_user.nickname">取 消</el-button> -->
             </span>
@@ -220,7 +167,7 @@
 
 <script>
 import * as auth from "../utils/auth";
-import {getGroupInfo,getAllFriend,UpdateGroupInfo,AddGroupUser,DeleteGroupUser,DeleteGroup,ExitGroup,upload} from "@/api/group_manage";
+import { getGroupInfo, getAllFriend, UpdateGroupInfo, AddGroupUser, DeleteGroupUser, DeleteGroup, ExitGroup, upload } from "@/api/group_manage";
 
 export default {
 
@@ -247,8 +194,8 @@ export default {
 
             current_user: {
             },
-            
-            group: 
+
+            group:
             {
             },
 
@@ -296,13 +243,13 @@ export default {
             imageUrl: "",
 
 
-            object:{
+            object: {
             }
         };
     },
 
     computed: {
-  },
+    },
 
     created() {
         this.current_user = JSON.parse(localStorage.getItem('loginuser'));
@@ -311,21 +258,19 @@ export default {
     },
 
 
-    
+
     methods: {
 
-        Update_new_user()
-        {
+        Update_new_user() {
             const newFriend = [];
-            this.Friends.forEach( (friend) => {
+            this.Friends.forEach((friend) => {
                 let tag = 1;
-                this.Group_users.forEach( (member) => {
-                    if(friend.id == member.id)
-                    {
-                        tag=0;
+                this.Group_users.forEach((member) => {
+                    if (friend.id == member.id) {
+                        tag = 0;
                     }
                 })
-                if(tag)
+                if (tag)
                     newFriend.push(friend);
             })
 
@@ -334,13 +279,11 @@ export default {
         },
 
 
-        Update_old_user()
-        {
+        Update_old_user() {
             const newFriend = [];
-            this.Group_users.forEach( (Group_user) => {
+            this.Group_users.forEach((Group_user) => {
                 let tag = 1;
-                if(Group_user.id == this.current_user.id)
-                {
+                if (Group_user.id == this.current_user.id) {
                     tag = 0;
                 }
                 if (tag)
@@ -351,21 +294,17 @@ export default {
             this.Old_users = newFriend;
         },
 
-        Click_UpdateInfo()
-        {
-            if(this.group.is_owner === true)
-            {
+        Click_UpdateInfo() {
+            if (this.group.is_owner === true) {
                 this.GroupEditFlag = true;
             }
-            else{
+            else {
                 this.$message.error('这有群主才能修改群信息');
             }
         },
 
-        Click_UpdateInfo_True()
-        {
-            if(this.Edit_group.new_name && this.Edit_group.new_description && this.object.id)
-            {
+        Click_UpdateInfo_True() {
+            if (this.Edit_group.new_name && this.Edit_group.new_description && this.object.id) {
                 this.GroupEditFlag = false;
                 this.update_GroupInfo();
 
@@ -378,14 +317,13 @@ export default {
                     type: 'success'
                 });
             }
-            else{
+            else {
                 this.$message.error('信息未填写完成');
             }
 
         },
 
-        Click_UpdateInfo_False()
-        {
+        Click_UpdateInfo_False() {
             this.Edit_group.new_name = null;
             this.Edit_group.new_description = null;
             this.object.id = null;
@@ -393,16 +331,13 @@ export default {
             this.$message.error('群信息未修改');
         },
 
-        Click_AddUser()
-        {
+        Click_AddUser() {
             this.Update_new_user();
             this.AddUserFlag = true;
         },
 
-        Click_AddUser_True()
-        {
-            if(this.form_addUser.id)
-            {
+        Click_AddUser_True() {
+            if (this.form_addUser.id) {
                 this.AddUserFlag = false;
                 this.add_User();
 
@@ -413,36 +348,31 @@ export default {
                     type: 'success'
                 });
             }
-            else{
+            else {
                 this.$message.error('信息未填写完成');
             }
 
         },
 
-        Click_AddUser_False()
-        {
+        Click_AddUser_False() {
             this.form_addUser.id = null;
             this.AddUserFlag = false;
 
             this.$message.error('未发送邀请');
         },
 
-        Click_DeleteUser()
-        {
+        Click_DeleteUser() {
             this.Update_old_user();
-            if(this.group.is_owner === true)
-            {
+            if (this.group.is_owner === true) {
                 this.DeleteUserFlag = true;
             }
-            else{
+            else {
                 this.$message.error('你并不是管理员，无法操作');
             }
         },
 
-        Click_DeleteUser_True()
-        {
-            if(this.form_deleteUser.id)
-            {
+        Click_DeleteUser_True() {
+            if (this.form_deleteUser.id) {
                 this.DeleteUserFlag = false;
                 this.delete_User();
 
@@ -453,13 +383,12 @@ export default {
                     type: 'success'
                 });
             }
-            else{
+            else {
                 this.$message.error('信息未填写完成');
             }
         },
 
-        Click_DeleteUser_False()
-        {
+        Click_DeleteUser_False() {
             this.form_deleteUser.id = null;
 
             this.DeleteUserFlag = false;
@@ -470,7 +399,7 @@ export default {
 
 
         // 接口函数
-        get_GroupInfo(){
+        get_GroupInfo() {
             getGroupInfo(
                 {
                     group_id: this.groupid
@@ -484,19 +413,19 @@ export default {
                     console.log(this.group)
                     console.log(this.Group_users)
                 } else {
-                // 获取博客列表失败，显示失败消息
+                    // 获取博客列表失败，显示失败消息
                     this.$message.error(response.data.msg);
                 }
             })
-            .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
-            });
-        },  
-        
+                .catch(error => {
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
+                });
+        },
+
 
         // 获得所有的朋友列表
-        get_Fridendlist(){
+        get_Fridendlist() {
             getAllFriend().then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
@@ -504,19 +433,19 @@ export default {
                     console.log("boke")
                     console.log(this.New_users)
                 } else {
-                // 获取朋友失败，显示失败消息
+                    // 获取朋友失败，显示失败消息
                     this.$message.error(response.data.msg);
                 }
             })
-            .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
-            });
-        },  
+                .catch(error => {
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
+                });
+        },
 
 
         //更新群组的信息
-        update_GroupInfo(){
+        update_GroupInfo() {
             UpdateGroupInfo(
                 {
                     group_id: this.group.id,
@@ -524,8 +453,7 @@ export default {
                     description: this.Edit_group.new_description,
                     image_file_id: this.object.id
                 }
-            ).then(response => 
-            {
+            ).then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
                     this.group.id = response.data.data.id;
@@ -538,19 +466,18 @@ export default {
                     this.$message.error(response.data.msg);
                 }
             })
-            .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
-            });
+                .catch(error => {
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
+                });
         },
 
 
-        add_User(){
+        add_User() {
             AddGroupUser({
                 user_id: this.form_addUser.id,
                 group_id: this.group.id
-            }).then(response => 
-            {
+            }).then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
                 } else {
@@ -558,18 +485,17 @@ export default {
                     this.$message.error(response.data.msg);
                 }
             })
-            .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
-            });
+                .catch(error => {
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
+                });
         },
 
-        delete_User(){
+        delete_User() {
             DeleteGroupUser({
                 user_id: this.form_deleteUser.id,
                 group_id: this.group.id
-            }).then(response => 
-            {
+            }).then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
                 } else {
@@ -577,15 +503,14 @@ export default {
                     this.$message.error(response.data.msg);
                 }
             })
-            .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
-            });
+                .catch(error => {
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
+                });
         },
 
-        delete_exit()
-        {
-            if(this.group.is_owner === true){
+        delete_exit() {
+            if (this.group.is_owner === true) {
                 this.$confirm('此操作将解散这个群组, 是否继续?', '警告', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -597,11 +522,11 @@ export default {
                     this.$message({
                         type: 'info',
                         message: '已取消删除'
-                    });          
+                    });
                 });
 
             }
-            else{
+            else {
                 this.$confirm('此操作将退出这个群组, 是否继续?', '警告', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -613,17 +538,16 @@ export default {
                     this.$message({
                         type: 'info',
                         message: '已取消删除'
-                    });          
+                    });
                 });
             }
         },
 
 
-        exit_Group(){
+        exit_Group() {
             ExitGroup({
                 group_id: this.group.id
-            }).then(response => 
-            {
+            }).then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
                 } else {
@@ -631,18 +555,17 @@ export default {
                     this.$message.error(response.data.msg);
                 }
             })
-            .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
-            });
+                .catch(error => {
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
+                });
         },
 
 
-        delete_Group(){
+        delete_Group() {
             DeleteGroup({
                 group_id: this.group.id
-            }).then(response => 
-            {
+            }).then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
                 } else {
@@ -650,10 +573,10 @@ export default {
                     this.$message.error(response.data.msg);
                 }
             })
-            .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
-            });
+                .catch(error => {
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
+                });
         },
 
         //返回群聊
@@ -672,22 +595,23 @@ export default {
             }
         },
 
-        upload_file(){
+        upload_file() {
             console.log(this.selectedfile);
-            upload({file: this.selectedfile,
-                    usage: "群组头像",
-                    category: "图像"
+            upload({
+                file: this.selectedfile,
+                usage: "群组头像",
+                category: "图像"
             }).then(response => {
-                
+
                 if (response.data.code === 200) {
                     this.object = response.data.data;
                 } else {
                     this.$message.error(response.data.msg);
                 }
-                })
+            })
                 .catch(error => {
-                // 处理请求失败的逻辑
-                console.error('请求失败:', error);
+                    // 处理请求失败的逻辑
+                    console.error('请求失败:', error);
                 });
         },
 
@@ -699,7 +623,6 @@ export default {
 
 
 <style scoped>
-
 .main-container {
     width: 100%;
     height: 100%;
@@ -710,8 +633,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh; /* 父容器的高度设置为视口高度 */
-    width: 100vw; /* 父容器的宽度设置为视口宽度 */
+    height: 90vh;
+    /* 父容器的高度设置为视口高度 */
+    width: 100vw;
+    /* 父容器的宽度设置为视口宽度 */
 }
 
 .centered-container {
@@ -772,9 +697,11 @@ export default {
 .form-container {
     margin-top: 30px;
     width: 100%;
-    margin-left: 20px; /* 添加间距使表单与图片分开 */
+    margin-left: 20px;
+    /* 添加间距使表单与图片分开 */
     color: #fff;
-    text-align: left; /* 确保文本左对齐 */
+    text-align: left;
+    /* 确保文本左对齐 */
 }
 
 
@@ -782,6 +709,7 @@ export default {
     font-size: 26px;
     font-weight: 600;
 }
+
 .message_text {
     margin-top: 20px;
     width: 80%;
@@ -813,7 +741,8 @@ export default {
 
 .image-container1 {
     /* display: flex; */
-    gap: 10px; /* 图片之间的间距 */
+    gap: 10px;
+    /* 图片之间的间距 */
     padding: 20px;
 }
 
@@ -830,7 +759,7 @@ export default {
 
 .btn_options {
     position: fixed;
-    bottom: 200px; 
+    bottom: 200px;
 
     width: 344px;
     display: flex;
@@ -842,7 +771,7 @@ export default {
 
 
 .btn_options img {
-    
+
     cursor: pointer;
 }
 
@@ -880,7 +809,7 @@ export default {
     text-align: center;
 }
 
-.back{
+.back {
     position: fixed;
     bottom: 70px;
     padding-left: 175px;
@@ -888,7 +817,7 @@ export default {
     width: 10%;
     justify-content: space-around;
     margin: 30px auto 0 auto;
-} 
+}
 
 
 .Group-dot {
@@ -897,7 +826,7 @@ export default {
     height: 15px;
     background-color: rgb(135, 206, 235);
     border-radius: 50%;
-    margin-left: 5px; /* 可根据需要调整位置 */
+    margin-left: 5px;
+    /* 可根据需要调整位置 */
 }
-
 </style>
