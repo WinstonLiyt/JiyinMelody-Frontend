@@ -123,7 +123,8 @@
     color: #fff;
     height: 50px;
     line-height: 50px;
-    background-color: #000b17 !important; /* 必须加上这个背景色，否则鼠标离开会出现白色 */
+    background-color: #000b17 !important;
+    /* 必须加上这个背景色，否则鼠标离开会出现白色 */
 }
 
 .el-menu-item i {

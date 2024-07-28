@@ -13,7 +13,7 @@ export const store = createStore({
       },
       senderinfo: [],
       messagesToDisplay: [],
-      unread_num:'',
+      unread_num: '',
       friends: [],
       groups: [],
       notices: [],

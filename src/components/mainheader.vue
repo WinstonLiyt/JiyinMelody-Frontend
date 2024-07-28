@@ -30,7 +30,8 @@
               <i class="el-icon-arrow-down"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item disabled class="user-nickname"><b>{{ user.nickname || "用户" + user.id }}</b></el-dropdown-item>
+              <el-dropdown-item disabled class="user-nickname"><b>{{ user.nickname || "用户" + user.id
+              }}</b></el-dropdown-item>
               <el-dropdown-item command="info">个人信息</el-dropdown-item>
               <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
@@ -42,8 +43,8 @@
 </template>
 
 <script>
-import {getinfo} from '@/api/account.js'
-import {gettags} from '@/api/blogs.js'
+import { getinfo } from '@/api/account.js'
+import { gettags } from '@/api/blogs.js'
 import * as auth from '../utils/auth'
 
 export default {
@@ -61,7 +62,7 @@ export default {
     };
   },
   methods: {
-    
+
     handleSelect(key, keyPath) {
       this.activeIndex = key;
       console.log(key, keyPath);
@@ -79,7 +80,7 @@ export default {
       gettags().then(response => {
         if (response.data.code === 200) {
           this.tags = response.data.data;
-          this.tags.push({name:"全部"});
+          this.tags.push({ name: "全部" });
         } else {
           this.$message.error(response.data.msg);
         }
@@ -132,30 +133,30 @@ export default {
         this.activeIndex = "3";
       } else if (path.startsWith('/admin')) {
         this.activeIndex = "4";
-      }else {
+      } else {
         this.activeIndex = "1"; // 默认值
       }
     },
-  
-  getmyInfo() {
-    getinfo().then(
-      response => {
-        if (response.data.code === 200) {/*同上*/
-          console.log("yonghu" + response.data);
-          localStorage.setItem("loginuser", JSON.stringify(response.data.data))//存储用户信息
-          this.user = JSON.parse(localStorage.getItem('loginuser'));
-        } else {
-          // 请求信息失败，显示失败消息
-          this.$message.error(response.data.msg)
+
+    getmyInfo() {
+      getinfo().then(
+        response => {
+          if (response.data.code === 200) {/*同上*/
+            console.log("yonghu" + response.data);
+            localStorage.setItem("loginuser", JSON.stringify(response.data.data))//存储用户信息
+            this.user = JSON.parse(localStorage.getItem('loginuser'));
+          } else {
+            // 请求信息失败，显示失败消息
+            this.$message.error(response.data.msg)
+          }
         }
-      }
-    )
-      .catch(error => {
-        // 处理请求失败的逻辑
-        console.error('请求失败:', error);
-      });
+      )
+        .catch(error => {
+          // 处理请求失败的逻辑
+          console.error('请求失败:', error);
+        });
+    },
   },
-},
   created() {
     this.getmyInfo();
     this.gettaglist();
@@ -170,12 +171,14 @@ export default {
 .header {
   padding: 0;
 }
+
 .header-content {
   display: flex;
   height: 60px;
   background-color: #1e80ff;
   align-items: center;
 }
+
 .logo-container {
   height: 60px;
   width: 90px;
@@ -183,10 +186,12 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .logo {
   height: 100%;
   width: auto;
 }
+
 .welcome-text {
   width: 200px;
   color: #fff;
@@ -194,30 +199,37 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .menu-container {
   flex: 1;
   width: 80%;
 }
+
 .right-container {
   display: flex;
   align-items: center;
 }
+
 .search-container {
   display: flex;
   align-items: center;
   color: #fff;
 }
+
 .search-input {
   width: 300px;
   margin-right: 10px;
 }
+
 .search-select {
   width: 80px;
 }
+
 .user-container {
   display: flex;
   align-items: center;
 }
+
 .user-dropdown {
   width: 150px;
   color: #fff;
@@ -225,20 +237,24 @@ export default {
   text-align: right;
   margin-left: 10px;
 }
+
 .el-dropdown-link {
   display: flex;
   align-items: center;
 }
+
 .default-avatar {
   margin-right: 10px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
+
 .user-nickname {
   display: flex;
   align-items: center;
 }
+
 .dropdown-item {
   font-size: 14px;
   padding: 5px 0;

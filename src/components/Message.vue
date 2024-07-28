@@ -6,11 +6,13 @@
         <div class="flex flex-col items-end">
           <div class="flex items-center">
             <h2 class="text-black"> {{ message.keyname }} </h2>
-            <span :class="message.is_musician ? 'tag-musician' : 'tag-regular'">{{ message.is_musician ? '乐手' : '普通用户' }}</span>
+            <span :class="message.is_musician ? 'tag-musician' : 'tag-regular'">{{ message.is_musician ? '乐手' : '普通用户'
+            }}</span>
           </div>
           <div class="bg-regal-blue w-fit p-3 rounded-md text-end mt-1">
             <div v-if="message.blog_id !== null" class="text-center mt-2">
-              <router-link :to="{ name: 'blogdetail', params: { blogid: message.blog_id } }" target="_blank" class="hover:text-blue-800">
+              <router-link :to="{ name: 'blogdetail', params: { blogid: message.blog_id } }" target="_blank"
+                class="hover:text-blue-800">
                 <h2 class="text-white">{{ message.content }}</h2>
               </router-link>
             </div>
@@ -32,12 +34,14 @@
           <div class="flex items-center">
             <h2 class="text-black">{{ message.keyname }}</h2>
             <div v-if="this.$store.state.current.type !== 'notice'">
-              <span :class="message.is_musician ? 'tag-musician' : 'tag-regular'">{{ message.is_musician ? '乐手' : '普通用户' }}</span>
+              <span :class="message.is_musician ? 'tag-musician' : 'tag-regular'">{{ message.is_musician ? '乐手' : '普通用户'
+              }}</span>
             </div>
           </div>
           <div class="bg-slate-200 w-fit p-3 rounded-md text-start mt-1">
             <div v-if="message.blog_id !== null" class="text-center mt-2">
-              <router-link :to="{ name: 'blogdetail', params: { blogid: message.blog_id } }" target="_blank" class="hover:text-blue-800">
+              <router-link :to="{ name: 'blogdetail', params: { blogid: message.blog_id } }" target="_blank"
+                class="hover:text-blue-800">
                 <h2 class="text-blue-600">{{ message.content }}</h2>
               </router-link>
             </div>
@@ -63,11 +67,14 @@
             <span v-else>邀请你加入群聊：{{ message.dst_group.name }}</span>
             <div class="mt-2 flex justify-center">
               <template v-if="message.invitationStatus === '待处理'">
-                <button @click="acceptInvitation(message)" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 mr-2">接受</button>
-                <button @click="rejectInvitation(message)" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">拒绝</button>
+                <button @click="acceptInvitation(message)"
+                  class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 mr-2">接受</button>
+                <button @click="rejectInvitation(message)"
+                  class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">拒绝</button>
               </template>
               <template v-else>
-                <button class="bg-gray-500 text-white px-3 py-1 rounded cursor-not-allowed" disabled>{{ message.invitationStatus }}</button>
+                <button class="bg-gray-500 text-white px-3 py-1 rounded cursor-not-allowed" disabled>{{
+                  message.invitationStatus }}</button>
               </template>
             </div>
           </div>

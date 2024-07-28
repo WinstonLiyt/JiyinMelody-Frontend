@@ -1,8 +1,9 @@
 @font-face {
-  font-family: "element-icons"; /* Project id 4360838 */
+  font-family: "element-icons";
+  /* Project id 4360838 */
   src: url('iconfont.woff2?t=1701832724239') format('woff2'),
-       url('iconfont.woff?t=1701832724239') format('woff'),
-       url('iconfont.ttf?t=1701832724239') format('truetype');
+    url('iconfont.woff?t=1701832724239') format('woff'),
+    url('iconfont.ttf?t=1701832724239') format('truetype');
 }
 
 .element-icons {
@@ -16,5 +17,3 @@
 .el-icon-like:before {
   content: "\ec7f";
 }
-
-
