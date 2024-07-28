@@ -1,20 +1,20 @@
 <template>
   <div class="main-container" style="min-height: 800px;">
-    <mainheader/>
+    <mainheader />
 
     <div class="main-content">
       <div class="flex items-start gap-2">
         <div class="w-36 card fixed-content">
           <div class="category-item" :class="{ 'category-item-active': '全部博客' === current }"
-               @click="selectCategory('全部博客')">全部博客</div>
+            @click="selectCategory('全部博客')">全部博客</div>
           <div class="category-item" :class="{ 'category-item-active': item.name === current }"
-               v-for="(item, index) in tags" :key="index" @click="selectCategory(item.name)">{{ item.name }}</div>
+            v-for="(item, index) in tags" :key="index" @click="selectCategory(item.name)">{{ item.name }}</div>
         </div>
 
         <div class="flex-1">
           <div class="card" style="min-height:20rem">
-            <div v-for="(item, index) in blogs" :key="index" v-if="total > 0 && (item.tags.includes(current) || current === '全部博客')"
-                 class="blog-box">
+            <div v-for="(item, index) in blogs" :key="index"
+              v-if="total > 0 && (item.tags.includes(current) || current === '全部博客')" class="blog-box">
               <div class="flex-1 w-0">
                 <router-link :to="{ name: 'blogdetail', params: { blogid: item.id } }" target="_blank">
                   <div class="blog-title">{{ item.title }}</div>
@@ -22,7 +22,8 @@
                 <div class="line1 text-gray-600 mb-2 text-sm">{{ item.content }}</div>
                 <div class="flex items-center">
                   <div class="flex-1 text-sm text-gray-600">
-                    <span class="mr-6"><i class="el-icon-user"></i> {{ item.author.nickname || "用户" + item.author.id }}</span>
+                    <span class="mr-6"><i class="el-icon-user"></i> {{ item.author.nickname || "用户" + item.author.id
+                    }}</span>
                     <span class="mr-6"><i class="el-icon-like"></i> {{ item.like_count }}</span>
                     <span class="mr-6"><i class="el-icon-star-off"></i> {{ item.collect_count }}</span>
                   </div>
@@ -36,24 +37,27 @@
           </div>
         </div>
 
-        <div class="w-64 fixed-content" >
-          <div class="card mb-2" >
+        <div class="w-64 fixed-content">
+          <div class="card mb-2">
             <div class="text-lg font-bold mb-2">欢迎您！😊</div>
             <el-button type="primary" @click="tocreate" target="_blank" class="" style="color: white;">
               点此新建博客记录美好的一天
             </el-button>
           </div>
 
-          <div class="card mb-2" >
+          <div class="card mb-2">
             <div class="flex items-center pb-2 border-b border-gray-300 mb-2">
               <div class="flex-1 text-lg">热门帖子</div>
-              <div class="text-sm text-gray-600 cursor-pointer" @click="refreshtop"><i class="el-icon-refresh"></i> 换一换</div>
+              <div class="text-sm text-gray-600 cursor-pointer" @click="refreshtop"><i class="el-icon-refresh"></i> 换一换
+              </div>
             </div>
             <div>
-              <div v-for="(item, index) in topblogs" :key="index" class="topline mb-4" v-if="index >= topstart && index < topend">
+              <div v-for="(item, index) in topblogs" :key="index" class="topline mb-4"
+                v-if="index >= topstart && index < topend">
                 <router-link :to="{ name: 'blogdetail', params: { blogid: item.id } }" target="_blank">
                   <span class="inline-block w-6 text-right mr-2">
-                    <span :class="{'text-orange-500': index === 0, 'text-yellow-500': index === 1, 'text-blue-500': index === 2, 'text-gray-600': index > 2}">
+                    <span
+                      :class="{ 'text-orange-500': index === 0, 'text-yellow-500': index === 1, 'text-blue-500': index === 2, 'text-gray-600': index > 2 }">
                       {{ index + 1 }}
                     </span>
                   </span>
@@ -119,8 +123,8 @@ export default {
     this.gettaglist();
   },
   methods: {
-    tocreate(){
-     this.$router.push('/createblog')
+    tocreate() {
+      this.$router.push('/createblog')
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -215,22 +219,26 @@ export default {
   height: 100%;
   background-color: rgb(223, 223, 223);
 }
+
 .main-content {
   height: 100%;
   width: 80%;
   margin: 5px auto;
 }
+
 .category-item {
   text-align: center;
   padding: 10px 0;
   font-size: 16px;
   cursor: pointer;
 }
+
 .category-item-active {
   background-color: #1890ff;
   color: #fff;
   border-radius: 5px;
 }
+
 .blog-box {
   display: flex;
   gap: 15px;
@@ -238,35 +246,43 @@ export default {
   border-bottom: 1px solid #ddd;
   height: auto;
 }
+
 .blog-box:first-child {
   padding-top: 0;
 }
+
 .blog-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
   cursor: pointer;
 }
+
 .blog-title:hover {
   color: #2a60c9;
 }
+
 .fixed-content {
   /*表示跟随页面滚动的类*/
 }
+
 .flexcenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .default-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
+
 .user-nickname {
   text-align: center;
   margin-bottom: 10px;
 }
+
 .card {
   background-color: white;
   padding: 16px;
@@ -274,7 +290,7 @@ export default {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   height: auto;
 }
+
 .min-h-80 {
   min-height: 80vh;
-}
-</style>
+}</style>

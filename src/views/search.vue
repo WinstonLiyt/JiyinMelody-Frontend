@@ -6,7 +6,7 @@
 
         <div class="card" style="height: 100%; max-width:15%">
           <h1>搜索结果</h1>
-          <p>搜索内容: {{ keyword.length > maxLength ? keyword.substring(0, maxLength) + '...' : keyword  }}</p>
+          <p>搜索内容: {{ keyword.length > maxLength ? keyword.substring(0, maxLength) + '...' : keyword }}</p>
           <p>搜索标签: {{ selectedtag }}</p>
 
         </div>
@@ -16,10 +16,12 @@
             <div class="card" style="margin-bottom: 5px">
               <h1>用户</h1>
               <div v-if="users.length > 0">
-                <div class="blog-box" v-for="(user, userindex) in users" :key="userindex" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                <div class="blog-box" v-for="(user, userindex) in users" :key="userindex"
+                  style="display: flex; align-items: flex-start; margin-bottom: 20px;">
                   <!-- Avatar -->
                   <div style="flex-shrink: 0; margin-right: 15px;">
-                    <img :src="user.image_url || defaultAvatar" alt="" style="width: 50px; height: 50px; border-radius: 50%" @click="touserinfo(user.id)">
+                    <img :src="user.image_url || defaultAvatar" alt=""
+                      style="width: 50px; height: 50px; border-radius: 50%" @click="touserinfo(user.id)">
                   </div>
                   <!-- User Info -->
                   <div style="flex-grow: 1;">
@@ -52,10 +54,11 @@
                         <span style="color: #666; margin-right: 30px"><i class="el-icon-user"></i> {{
                           item.author.nickname || "用户" + item.author.id }}</span>
                         <span style="color: #666; margin-right: 30px"><i class="el-icon-like"></i> {{ item.like_count
-                          }}</span>
+                        }}</span>
                         <span style="color: #666; margin-right: 30px"><i class="el-icon-star-off"></i> {{
                           item.collect_count }}</span>
-                          <span style="color: #666; margin-right: 30px"><i class="el-icon-date"></i> {{ item.timestamp }}</span>
+                        <span style="color: #666; margin-right: 30px"><i class="el-icon-date"></i> {{ item.timestamp
+                        }}</span>
                       </div>
                       <div style="width: fit-content">
                         <el-tag v-for="(item, index) in item.tags " :key="index" type="primary"
@@ -111,7 +114,6 @@
     </div>
     <el-backtop></el-backtop>
   </div>
-
 </template>
 
 <script>
@@ -120,7 +122,7 @@ import { search } from '@/api/search.js'
 import mainheader from '@/components/mainheader.vue'
 
 export default {
-  
+
   components: {
     mainheader
   },
@@ -150,10 +152,10 @@ export default {
 
   computed: {
     topblogs() {
-       // 克隆原始博客数组
-    const clonedBlogs = this.blogs.slice();
-    // 对克隆的数组进行排序，不改变原始博客数组的顺序
-    return clonedBlogs.sort((a, b) => b.like_count - a.like_count);
+      // 克隆原始博客数组
+      const clonedBlogs = this.blogs.slice();
+      // 对克隆的数组进行排序，不改变原始博客数组的顺序
+      return clonedBlogs.sort((a, b) => b.like_count - a.like_count);
     }
   },
   mounted() {
@@ -167,19 +169,18 @@ export default {
     this.getsearch();
   },
   methods: {
-    touserinfo(sendid){
-if(this.user.id=== sendid){
-  this.$router.push({ name: 'UserView', params: { id: this.user.id } });
-}
-else{
-  this.$router.push({ name: 'OtherView', params: { id: sendid } });
-}
+    touserinfo(sendid) {
+      if (this.user.id === sendid) {
+        this.$router.push({ name: 'UserView', params: { id: this.user.id } });
+      }
+      else {
+        this.$router.push({ name: 'OtherView', params: { id: sendid } });
+      }
     },
     getsearch() {
       console.log(this.keyword, this.selectedtag)
-      if(this.$route.query.filter==="全部")
-      {
-        this.selectedtag=[];
+      if (this.$route.query.filter === "全部") {
+        this.selectedtag = [];
       }
       search({
         keyword: this.keyword,

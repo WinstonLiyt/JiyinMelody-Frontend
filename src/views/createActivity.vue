@@ -1,67 +1,40 @@
 <template>
   <div class="main-container">
-    <mainheader/>
+    <mainheader />
     <div class="main-content">
-      <div
-        style="
+      <div style="
           width: 50%;
           margin: 5px auto;
           align-items: center;
           justify-content: center;
-        "
-      >
+        ">
         <div class="card" style="margin-bottom: 100px; flex-wrap: wrap">
-          <div
-            style="
+          <div style="
               display: flex;
               align-items: center;
               justify-content: center;
               flex-wrap: wrap; /*关键*/
-            "
-          >
-            <div
-              style="font-weight: bold; font-size: 24px; margin-bottom: 30px"
-            >
+            ">
+            <div style="font-weight: bold; font-size: 24px; margin-bottom: 30px">
               发布新活动
             </div>
           </div>
 
-          <el-form
-            :model="activity"
-            label-width="100px"
-            align="left"
-            style="padding-right: 50px; text-align: left"
-            :rules="rules"
-            ref="activityref"
-          >
+          <el-form :model="activity" label-width="100px" align="left" style="padding-right: 50px; text-align: left"
+            :rules="rules" ref="activityref">
             <el-form-item label="标题" prop="title">
               <el-input v-model="activity.title" placeholder="标题"></el-input>
             </el-form-item>
             <el-form-item label="描述" prop="description">
-              <el-input
-                type="textarea"
-                :rows="10"
-                placeholder="请输入内容"
-                v-model="activity.description"
-              ></el-input>
+              <el-input type="textarea" :rows="10" placeholder="请输入内容" v-model="activity.description"></el-input>
             </el-form-item>
             <el-form-item label="结束时间" prop="end_at">
-              <el-date-picker
-                type="datetime"
-                placeholder="请选择时间"
-                v-model="activity.end_at"
-                :picker-options="pickerOptions"
-              ></el-date-picker>
+              <el-date-picker type="datetime" placeholder="请选择时间" v-model="activity.end_at"
+                :picker-options="pickerOptions"></el-date-picker>
             </el-form-item>
           </el-form>
           <div style="text-align: center">
-            <el-button
-              type="primary"
-              size="medium"
-              style="width: 100px"
-              @click="createActivity()"
-              >发布</el-button
-            >
+            <el-button type="primary" size="medium" style="width: 100px" @click="createActivity()">发布</el-button>
           </div>
         </div>
       </div>
@@ -115,9 +88,9 @@ export default {
   },
   components: {
 
-  mainheader
+    mainheader
   },
-  beforedestroyed() {},
+  beforedestroyed() { },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -173,12 +146,14 @@ export default {
   background-color: rgb(223, 223, 223);
   overflow: visible;
 }
+
 .main-content {
   display: flex;
   height: 100%;
   width: 80%;
   margin: 10px auto;
 }
+
 .el-form-item__label {
   text-align: center;
   vertical-align: middle;
@@ -189,6 +164,7 @@ export default {
   padding: 0 12px 0 0;
   box-sizing: border-box;
 }
+
 .aud {
   width: 100%;
 }

@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store' // 导入store
+import store from './store' // Importing Vuex store
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import '@/assets/css/global.css' 
+import '@/assets/css/global.css'
 import axios from 'axios'
 import * as auth from './utils/auth'
 import 'video.js/dist/video-js.css'
@@ -22,24 +22,24 @@ Vue.use(VueVideoPlayer)
 
 // Router beforeEach hook to handle authentication
 router.beforeEach((to, from, next) => {
-  console.log('需要登录才能访问')
-  if (to.meta.needlogin) {
-    if (auth.getuserInfo()) {
+  console.log('Access requires login')
+  if (to.meta.needlogin) { // Check if the route requires login
+    if (auth.getuserInfo()) { // Check if user information is available
       console.log(auth.getuserInfo())
-      console.log('有cookie信息')
+      console.log('User information found in cookies')
       next()
     } else {
-      console.log('无cookie信息')
-      next({ path: '/login' })
+      console.log('No user information in cookies')
+      next({ path: '/login' }) // Redirect to login page if no user information
     }
   } else {
-    next()
+    next() // Continue to the route if login is not required
   }
 })
 
 // Create and mount the Vue instance
 new Vue({
   router,
-  store, // 使用store
+  store, // Use Vuex store
   render: h => h(App)
 }).$mount('#app')

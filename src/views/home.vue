@@ -1,5 +1,5 @@
 <template>
-  <mainheader/>
+  <mainheader />
 </template>
 
 <script>
@@ -9,7 +9,7 @@ import mainheader from '@/components/mainheader.vue'
 export default {
   name: 'home',
   components: {
-  mainheader
+    mainheader
   },
   data() {
     return {
@@ -48,13 +48,15 @@ export default {
 .flexcenter {
   @apply flex items-center justify-center;
 }
+
 .default-avatar {
   @apply w-10 h-10 rounded-full;
 }
+
 .el-dropdown-menu {
   @apply w-24 text-center;
 }
+
 .user-nickname {
   @apply inline-block text-sm py-1 border-b border-black max-w-full;
-}
-</style>
+}</style>

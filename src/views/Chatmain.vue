@@ -1,6 +1,6 @@
 <template>
   <div style="width:100%; height:100%">
-    <mainheader/>
+    <mainheader />
     <div class="flex h-screen">
       <Contacts_Container class="w-1/4 bg-gray-100 overflow-y-auto"></Contacts_Container>
       <Chat class="w-3/4 bg-white overflow-y-auto" ref="chat"></Chat>
@@ -81,7 +81,7 @@ export default {
     updateMessages(newMessages) {
       const existingMessages = this.$store.state.messagesToDisplay;
       const latestMessageTimestamp = existingMessages.length ? new Date(existingMessages[existingMessages.length - 1].datetime).getTime() : 0;
-      
+
       newMessages.forEach(message => {
         const messageTimestamp = new Date(this.formatDate(message.timestamp)).getTime();
         if (messageTimestamp > latestMessageTimestamp) {

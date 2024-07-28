@@ -1,61 +1,36 @@
 <template>
-  <div class="main-container"  style="min-height: 800px;">
-    <mainheader/>
+  <div class="main-container" style="min-height: 800px;">
+    <mainheader />
     <div class="main-content">
-      <div
-        style="
+      <div style="
           width: 50%;
           margin: 5px auto;
           align-items: center;
           justify-content: center;
-        "
-      >
+        ">
         <div class="card" style="margin-bottom: 100px; flex-wrap: wrap">
-          <div
-            style="
+          <div style="
               display: flex;
               align-items: center;
               justify-content: center;
               flex-wrap: wrap; /*关键*/
-            "
-          >
-            <div
-              style="font-weight: bold; font-size: 24px; margin-bottom: 30px"
-            >
+            ">
+            <div style="font-weight: bold; font-size: 24px; margin-bottom: 30px">
               发表新作品
             </div>
           </div>
 
-          <input
-            type="file"
-            ref="fileInput"
-            accept="audio/*"
-            @change="handleFileChange"
-            style="display: none"
-          />
-          <el-form
-            :model="work"
-            label-width="100px"
-            align="left"
-            style="padding-right: 50px; text-align: left"
-            :rules="rules"
-            ref="workref"
-          >
+          <input type="file" ref="fileInput" accept="audio/*" @change="handleFileChange" style="display: none" />
+          <el-form :model="work" label-width="100px" align="left" style="padding-right: 50px; text-align: left"
+            :rules="rules" ref="workref">
             <el-form-item label="标题" prop="title">
               <el-input v-model="work.title" placeholder="标题"></el-input>
             </el-form-item>
             <el-form-item label="内容" prop="content">
-              <el-input
-                type="textarea"
-                :rows="10"
-                placeholder="请输入内容"
-                v-model="work.content"
-              ></el-input>
+              <el-input type="textarea" :rows="10" placeholder="请输入内容" v-model="work.content"></el-input>
             </el-form-item>
             <el-form-item label="上传音乐" prop="music">
-              <el-button type="primary" @click="uploadfile"
-                >上传<i class="el-icon-upload el-icon--right"></i
-              ></el-button>
+              <el-button type="primary" @click="uploadfile">上传<i class="el-icon-upload el-icon--right"></i></el-button>
             </el-form-item>
             <div v-if="work.music_file_id !== null">
               <audio controls ref="audio" class="aud">
@@ -64,13 +39,7 @@
             </div>
           </el-form>
           <div style="text-align: center">
-            <el-button
-              type="primary"
-              size="medium"
-              style="width: 100px"
-              @click="createWork()"
-              >发布</el-button
-            >
+            <el-button type="primary" size="medium" style="width: 100px" @click="createWork()">发布</el-button>
           </div>
         </div>
       </div>
@@ -91,7 +60,7 @@ export default {
   props: ["activityid"],
   components: {
 
-  mainheader
+    mainheader
   },
   data() {
     return {
@@ -124,7 +93,7 @@ export default {
     console.log(this.activityid);
     //this.gettaglist();
   },
-  beforedestroyed() {},
+  beforedestroyed() { },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -202,7 +171,7 @@ export default {
       this.selectedfile = this.$refs.fileInput.files[0];
       if (this.selectedfile !== null) this.upload();
     },
-    save() {},
+    save() { },
   },
 };
 </script>
@@ -216,12 +185,14 @@ export default {
   background-color: rgb(223, 223, 223);
   overflow: visible;
 }
+
 .main-content {
   display: flex;
   height: 100%;
   width: 80%;
   margin: 10px auto;
 }
+
 .el-form-item__label {
   text-align: center;
   vertical-align: middle;
@@ -232,6 +203,7 @@ export default {
   padding: 0 12px 0 0;
   box-sizing: border-box;
 }
+
 .aud {
   width: 100%;
 }
