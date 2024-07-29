@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'http://1.94.180.222:8000',
-  timeout: 5000000000000000
+  baseURL: 'https://www.tjeatwhat.cn',
+  timeout: 5000
 });
 
 export default request
