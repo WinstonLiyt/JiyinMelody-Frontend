@@ -1,136 +1,152 @@
+/**
+ * 将获取 token 和创建 headers 的逻辑提取为一个辅助函数 getAuthHeaders
+ */
+
 import request from './config'
 
-export function login(data) {//登录
+// Helper function to get token from localStorage and create headers
+function getAuthHeaders() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return Promise.reject(new Error('Token not found'));
+  }
+  return {
+    'Authorization': `Token ${token}`
+  };
+}
+
+/**
+ * Log in a user.
+ * @param {Object} data - The login data.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function login(data) {
   return request({
     url: '/account/login/',
     method: 'post',
     data: data,
-  })
+  });
 }
 
-export function getinfo() {//获取用户信息
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
+/**
+ * Get user information.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function getinfo() {
+  const headers = getAuthHeaders();
+  if (headers instanceof Promise) {
+    return headers;
   }
-
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
   return request({
     url: '/account/me/',
     method: 'post',
     headers: headers
-  })
+  });
 }
 
-export function verify(data) {//请求验证码
+/**
+ * Request verification code.
+ * @param {Object} data - The verification data.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function verify(data) {
   return request({
     url: '/account/verify/',
     method: 'post',
     data: data
-  })
+  });
 }
 
-export function register(data) {//注册
+/**
+ * Register a new user.
+ * @param {Object} data - The registration data.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function register(data) {
   return request({
     url: '/account/register/',
     method: 'post',
     data: data
-  })
+  });
 }
 
-export function findpass(data) {//找回密码
+/**
+ * Find password.
+ * @param {Object} data - The data to update the password.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function findpass(data) {
   return request({
     url: '/account/update_password/',
     method: 'post',
     data: data
-  })
+  });
 }
 
-export function getinfo_other(data) {//获取用户信息
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
+/**
+ * Get information of another user.
+ * @param {Object} data - The data for querying user information.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function getinfo_other(data) {
+  const headers = getAuthHeaders();
+  if (headers instanceof Promise) {
+    return headers;
   }
-
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
   return request({
     url: '/account/query/',
     method: 'post',
     data: data,
     headers: headers
-  })
+  });
 }
 
+/**
+ * Get information by user ID.
+ * @returns {Promise} - The Axios request promise.
+ */
 export function getInfoById() {
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
+  const headers = getAuthHeaders();
+  if (headers instanceof Promise) {
+    return headers;
   }
-
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
-  // 发送GET请求到指定的接口，比如 '/account/users/{userId}/'
   return request({
-    url: `/account/me/`, // 使用模板字符串插入userId
+    url: `/account/me/`,
     method: 'POST',
     headers: headers
-  })
+  });
 }
 
-export function getfri() {//获取好友
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
+/**
+ * Get friends list.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function getfri() {
+  const headers = getAuthHeaders();
+  if (headers instanceof Promise) {
+    return headers;
   }
-
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
   return request({
     url: '/relation/friend/list/',
     method: 'post',
     headers: headers
-  })
+  });
 }
 
-export function getotherinfo(data) {//获取其他用户信息
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
+/**
+ * Get information of other users.
+ * @param {Object} data - The data for querying other users' information.
+ * @returns {Promise} - The Axios request promise.
+ */
+export function getotherinfo(data) {
+  const headers = getAuthHeaders();
+  if (headers instanceof Promise) {
+    return headers;
   }
-
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
   return request({
     url: '/account/me/',
     method: 'post',
     headers: headers,
     data: data
-  })
+  });
 }
