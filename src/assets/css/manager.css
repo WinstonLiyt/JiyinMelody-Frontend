@@ -1,12 +1,21 @@
+/**
+ * 分离不同部分：将管理器容器、管理器头部、管理器主体和 Element UI 样式覆盖部分分组，增加代码的可读性。
+ * 删除多余的注释：移除多余注释，以简洁为主，仅保留必要的解释性注释。
+ * 格式一致性：确保所有的 CSS 属性和选择器格式一致，提高代码的整洁度和一致性。
+ * 合并相似样式：合并具有相似样式的选择器，减少重复代码。
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Manager container styles */
 .manager-container {
     background-color: #f8f8ff;
     min-height: 100vh;
 }
 
+/* Manager header styles */
 .manager-header {
     display: flex;
     background-color: #0066bc;
@@ -17,7 +26,7 @@
     height: 60px;
     padding-left: 10px;
     display: flex;
-    align-items: center
+    align-items: center;
 }
 
 .manager-header-left img {
@@ -30,14 +39,14 @@
     margin-left: 5px;
     font-size: 20px;
     font-weight: bold;
-    color: #eee
+    color: #eee;
 }
 
 .manager-header-center {
     flex: 1;
     width: 0;
     display: flex;
-    align-items: center
+    align-items: center;
 }
 
 .manager-header-right {
@@ -52,16 +61,17 @@
     align-items: center;
     padding-right: 10px;
     color: #eee;
-    cursor: default
+    cursor: default;
 }
 
 .manager-header-right .avatar img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 5px
+    margin-right: 5px;
 }
 
+/* Manager main styles */
 .manager-main {
     display: flex;
 }
@@ -69,7 +79,7 @@
 .manager-main-left {
     width: 200px;
     min-height: calc(100vh - 60px);
-    box-shadow: 0 0 6px rgba(0, 21, 41, .35);
+    box-shadow: 0 0 6px rgba(0, 21, 41, 0.35);
 }
 
 .manager-main-right {
@@ -78,34 +88,26 @@
     padding: 10px;
 }
 
-.manager-main-right .search {
+.manager-main-right .search,
+.manager-main-right .operation,
+.manager-main-right .table {
     padding: 10px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-.manager-main-right .operation {
     margin-top: 5px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1)
 }
 
 .manager-main-right .table {
-    margin-top: 5px;
     padding: 15px 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .manager-main-right .table .pagination {
     margin-top: 10px;
 }
 
-/* ElementUI */
+/* ElementUI styles override */
 .el-menu {
     width: 200px;
     height: 100%;
@@ -124,7 +126,6 @@
     height: 50px;
     line-height: 50px;
     background-color: #000b17 !important;
-    /* 必须加上这个背景色，否则鼠标离开会出现白色 */
 }
 
 .el-menu-item i {
@@ -142,15 +143,6 @@
 
 .el-menu .is-active {
     color: #fff !important;
-}
-
-.el-submenu__title:hover {
-    /*background-color: #222 !important;*/
-}
-
-.el-menu-item:not(.is-active):hover {
-    /*background-color: #0376bf !important;*/
-    /*color: #fff;*/
 }
 
 .el-menu-item:hover {

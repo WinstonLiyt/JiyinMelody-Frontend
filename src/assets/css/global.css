@@ -1,7 +1,14 @@
+/**
+ * 分离不同部分：将基础样式、文本样式、卡片样式和其他自定义样式分组，增加代码的可读性。
+ * 删除多余的注释：移除多余注释，以简洁为主，仅保留必要的解释性注释。
+ * 格式一致性：确保所有的 CSS 属性和选择器格式一致，提高代码的整洁度和一致性。
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Reset default margin and padding for common elements */
 html,
 body,
 div,
@@ -11,19 +18,23 @@ el-header {
     padding: 0;
 }
 
+/* Body styles */
 body {
     font-size: 14px;
 }
 
+/* Anchor tag styles */
 a {
     color: #333;
     text-decoration: none;
 }
 
+/* Image styles inside .w-e-text class */
 .w-e-text img {
     width: 100% !important;
 }
 
+/* Card component styles */
 .card {
     padding: 20px;
     background-color: #fff;
@@ -31,31 +42,27 @@ a {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
+/* Single line text with ellipsis */
 .line1 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+/* Topline styles with ellipsis and hover effect */
 .topline {
     white-space: nowrap;
     overflow: hidden;
     min-height: 15px;
     text-overflow: ellipsis;
     border-radius: 5px;
-    /* 圆角大小为5px */
 }
 
 .topline:hover {
-    white-space: nowrap;
-    overflow: hidden;
-    min-height: 15px;
-    text-overflow: ellipsis;
-    border-radius: 5px;
-    /* 圆角大小为5px */
     background: rgb(30, 128, 255);
 }
 
+/* Text styles inside .topline */
 .top-text {
     color: #666;
 }
@@ -64,12 +71,13 @@ a {
     color: #fff;
 }
 
+/* Multiline text with ellipsis */
 .line2 {
     word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    /* 超出几行省略 */
+    /* Limits text to 2 lines */
     overflow: hidden;
 }
