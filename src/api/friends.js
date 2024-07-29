@@ -1,127 +1,100 @@
 import request from './config'
 
-
-export function getfriends() {//获取好友列表
-  // 从localStorage中读取token
+/**
+ * Helper function to get authentication headers
+ * @returns {Object} - Headers object with Authorization token
+ * @throws {Error} - If token is not found in localStorage
+ */
+function getAuthHeaders() {
   const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
   if (!token) {
     throw new Error('Token not found');
   }
-
-  // 将token添加到headers对象中
-  const headers = {
+  return {
     'Authorization': `Token ${token}`
   };
+}
+
+/**
+ * Get list of friends
+ * @returns {Promise} - Axios request promise
+ */
+export function getfriends() {
+  const headers = getAuthHeaders();
   return request({
     url: '/relation/friend/list/',
     method: 'post',
     headers: headers
-  })
+  });
 }
 
-export function getgroups() {//获取小组列表
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
+/**
+ * Get list of groups
+ * @returns {Promise} - Axios request promise
+ */
+export function getgroups() {
+  const headers = getAuthHeaders();
   return request({
     url: '/relation/group/list/',
     method: 'post',
     headers: headers
-  })
+  });
 }
 
-
-export function sendmessage(data) {//发送消息
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
+/**
+ * Send a message to a friend
+ * @param {Object} data - The data for sending a message
+ * @returns {Promise} - Axios request promise
+ */
+export function sendmessage(data) {
+  const headers = getAuthHeaders();
   return request({
     url: '/interact/chat/send_friend/',
     method: 'post',
     headers: headers,
     data: data
-  })
+  });
 }
 
-export function delet(data) {//删除好友
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
+/**
+ * Delete a friend
+ * @param {Object} data - The data for deleting a friend
+ * @returns {Promise} - Axios request promise
+ */
+export function delet(data) {
+  const headers = getAuthHeaders();
   return request({
     url: '/relation/friend/delete/',
     method: 'post',
     data: data,
     headers: headers
-  })
+  });
 }
 
-export function add_fri(data) {//增加好友
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
+/**
+ * Add a friend
+ * @param {Object} data - The data for adding a friend
+ * @returns {Promise} - Axios request promise
+ */
+export function add_fri(data) {
+  const headers = getAuthHeaders();
   return request({
     url: '/interact/invitation/invite_friend/',
     method: 'post',
     data: data,
     headers: headers
-  })
+  });
 }
 
-export function getmedal() {//获取小组列表
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
+/**
+ * Get list of medals (misnamed function, should correct endpoint)
+ * @returns {Promise} - Axios request promise
+ */
+export function getmedal() {
+  const headers = getAuthHeaders();
   return request({
-    url: '/relation/group/list/',
+    url: '/relation/group/list/', // The endpoint seems incorrect for medals, should verify the correct endpoint
     method: 'post',
     headers: headers
-  })
+  });
 }
-

@@ -1,131 +1,91 @@
+/**
+ * 使用辅助函数 getAuthHeaders 来统一获取 token 和创建 headers，避免重复代码。
+ */
+
 import request from './config'
 
-
-export function getNoticeGlobal() {
-  //获取特定的群组信息
-
-  // 从localStorage中读取token
+/**
+ * Helper function to get authentication headers
+ * @returns {Object} - Headers object with Authorization token
+ * @throws {Error} - If token is not found in localStorage
+ */
+function getAuthHeaders() {
   const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
   if (!token) {
     throw new Error('Token not found');
   }
-
-  // 将token添加到headers对象中
-  const headers = {
+  return {
     'Authorization': `Token ${token}`
   };
+}
 
+/**
+ * Get global notices
+ * @returns {Promise} - Axios request promise
+ */
+export function getNoticeGlobal() {
+  const headers = getAuthHeaders();
   return request({
     url: '/notice/list_global/',
     method: 'post',
     headers: headers
-  })
+  });
 }
 
-
-
+/**
+ * Create a global notice
+ * @param {Object} data - The data for creating a notice
+ * @returns {Promise} - Axios request promise
+ */
 export function createNoticeGlobal(data) {
-  //获取特定的群组信息
-
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
+  const headers = getAuthHeaders();
   return request({
     url: '/notice/create/',
     method: 'post',
     data: data,
     headers: headers
-  })
+  });
 }
 
-
-
+/**
+ * Get music applications
+ * @returns {Promise} - Axios request promise
+ */
 export function getMusicApplication() {
-  //获取特定的群组信息
-
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
+  const headers = getAuthHeaders();
   return request({
     url: '/permission/musician/list/',
     method: 'post',
     headers: headers
-  })
+  });
 }
 
-
-
+/**
+ * Review music application
+ * @param {Object} data - The data for reviewing a music application
+ * @returns {Promise} - Axios request promise
+ */
 export function reviewMusicApplication(data) {
-  //获取特定的群组信息
-
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
+  const headers = getAuthHeaders();
   return request({
     url: '/permission/musician/review/',
     method: 'post',
     data: data,
     headers: headers
-  })
+  });
 }
 
-
+/**
+ * Update admin information
+ * @param {Object} data - The data for updating admin information
+ * @returns {Promise} - Axios request promise
+ */
 export function updateAdmin(data) {
-  //获取特定的群组信息
-
-  // 从localStorage中读取token
-  const token = localStorage.getItem("token");
-
-  // 检查token是否存在，如果不存在，可以抛出一个错误或者返回一个Promise.reject()
-  if (!token) {
-    throw new Error('Token not found');
-  }
-
-  // 将token添加到headers对象中
-  const headers = {
-    'Authorization': `Token ${token}`
-  };
-
+  const headers = getAuthHeaders();
   return request({
     url: '/permission/admin/update/',
     method: 'post',
     data: data,
     headers: headers
-  })
+  });
 }
-
-
-
-
