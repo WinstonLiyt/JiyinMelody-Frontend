@@ -1,11 +1,19 @@
+/**
+ * 分离不同部分：将全局样式、通知样式、头部样式、主要内容样式和 Element UI 样式覆盖部分分别分组，增加代码的可读性。
+ * 删除多余的注释：移除多余注释，以简洁为主。
+ * 格式一致性：确保所有的 CSS 属性和选择器格式一致，提高代码的整洁度和一致性。
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Global styles */
 body {
     background-color: #e4e6eb;
 }
 
+/* Notice styles */
 .front-notice {
     padding: 5px 20px;
     color: #666;
@@ -13,6 +21,7 @@ body {
     background-color: #fff;
 }
 
+/* Header styles */
 .front-header {
     display: flex;
     height: 60px;
@@ -28,11 +37,18 @@ body {
     padding-left: 30px;
 }
 
+.front-header-left {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
 .front-header-left img,
 .front-header-dropdown img {
     width: 40px;
     height: 40px;
-    border-radius: 50%
+    border-radius: 50%;
 }
 
 .front-header-left .title {
@@ -65,13 +81,13 @@ body {
     text-align: center !important;
 }
 
-/*页面具体样式自定义*/
+/* Main content styles */
 .main-content {
     width: 80%;
     margin: 5px auto;
 }
 
-/* ElementUI 样式覆盖 */
+/* Element UI styles override */
 .el-menu.el-menu--horizontal {
     border: none !important;
     height: 59px;
