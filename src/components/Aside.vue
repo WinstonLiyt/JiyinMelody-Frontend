@@ -4,7 +4,7 @@
 3. 图片路径：使用 require 语法确保图片路径正确。
 4. 简化 HTML 语法：删除多余的 slot="title" 属性，使 HTML 语法更清晰。 -->
 
-<!-- <template>
+<template>
   <el-menu :default-openeds="['1', '3']"
     style="min-height: 100%;overflow-x: hidden; box-shadow: 2px 0 6px rgb(0 21 41/35%);"
     background-color="rgb(48, 65, 86)" text-color="#fff" active-text-color="#ffd04b" :collapse-transition="false"
@@ -44,9 +44,9 @@ export default {
 }
 </script>
 
-<style></style> -->
+<style></style>
 
-
+<!-- 
 <template>
   <el-menu
     :default-openeds="['1', '3']"
@@ -115,4 +115,4 @@ export default {
 .logo-text {
   color: white;
 }
-</style>
+</style> -->

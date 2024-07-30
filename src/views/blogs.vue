@@ -262,10 +262,6 @@ export default {
   color: #2a60c9;
 }
 
-.fixed-content {
-  /*表示跟随页面滚动的类*/
-}
-
 .flexcenter {
   display: flex;
   justify-content: center;
@@ -293,4 +289,5 @@ export default {
 
 .min-h-80 {
   min-height: 80vh;
-}</style>
+}
+</style>
