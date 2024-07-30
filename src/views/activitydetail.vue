@@ -290,8 +290,4 @@ export default {
 .blog-title:hover {
   color: #2a60c9;
 }
-
-.fixed-content {
-  /*表示跟随页面滚动的类*/
-}
 </style>
