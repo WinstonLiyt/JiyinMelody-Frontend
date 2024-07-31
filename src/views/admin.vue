@@ -2,14 +2,14 @@
     <div>
         <mainheader />
         <el-container style="min-height: 100vh">
-            <el-aside :width="sidewidth" style="background-color: rgb(238, 241, 246);">
+            <el-aside :width="sideWidth" style="background-color: rgb(238, 241, 246);">
                 <el-menu :default-openeds="['1', '3']"
                     style="min-height: 100%;overflow-x: hidden; box-shadow: 2px 0 6px rgb(0 21 41/35%);"
                     background-color="rgb(48, 65, 86)" text-color="#fff" active-text-color="#ffd04b"
                     :collapse-transition="false" :collapse="isCollapse">
 
                     <div style="height: 60px; line-height: 60px; text-align: center;">
-                        <b style="color: white;" v-show="logotextshow">管理员系统</b>
+                        <b style="color: white;" v-show="logoTexthow">管理员系统</b>
                     </div>
 
                     <el-submenu index="1">
@@ -43,16 +43,16 @@
                     <el-breadcrumb separator-class="el-icon-arrow-right">
                         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                         <el-breadcrumb-item>管理员系统</el-breadcrumb-item>
-                        <el-breadcrumb-item>{{ page_one }}</el-breadcrumb-item>
-                        <el-breadcrumb-item>{{ page_two }}</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{ submenuFirst }}</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{ submenuSecond }}</el-breadcrumb-item>
                     </el-breadcrumb>
 
 
-                    <div v-if="OnePage" style="margin-top: 20px;">
+                    <div v-if="firstPageChosen" style="margin-top: 20px;">
 
 
                         <div style="margin-bottom: 20px;">
-                            <el-button type="primary" @click="NoticeEditFlag = true">创建新通知<i
+                            <el-button type="primary" @click="noticeEditFlag = true">创建新通知<i
                                     class="el-icon-circle-plus-outline"></i></el-button>
                         </div>
 
@@ -73,14 +73,14 @@
                         </el-table>
 
                         <div style="padding: 10px 0;">
-                            <el-pagination :page-sizes="[5, 10, 15, 20]" :page-size="pageSize_Notice"
+                            <el-pagination :page-sizes="[5, 10, 15, 20]" :page-size="pageSizeNotice"
                                 layout="total, sizes, prev, pager, next, jumper" :total="tableNoticeData.length"
                                 @size-change="handleSizeChange_Notice" @current-change="handleCurrentChange_Notice">
                             </el-pagination>
                         </div>
                     </div>
 
-                    <div v-if="TwoPage" style="margin-top: 50px;">
+                    <div v-if="secondPageChosen" style="margin-top: 50px;">
 
                         <el-table :data="visibleApplicationData" stripe header-cell-class-name="headerb-g-c"
                             :default-sort="{ prop: 'id', order: 'descending' }">
@@ -112,7 +112,7 @@
                         </el-table>
 
                         <div style="padding: 10px 0;">
-                            <el-pagination :page-sizes="[5, 10, 15, 20]" :page-size="pageSize_Application"
+                            <el-pagination :page-sizes="[5, 10, 15, 20]" :page-size="pageSizeApplication"
                                 layout="total, sizes, prev, pager, next, jumper" :total="tableApplicationData.length"
                                 @size-change="handleSizeChange_Application"
                                 @current-change="handleCurrentChange_Application">
@@ -124,7 +124,7 @@
                 </el-main>
 
 
-                <el-dialog title="创建全局通知" :visible.sync="NoticeEditFlag" width="30%">
+                <el-dialog title="创建全局通知" :visible.sync="noticeEditFlag" width="30%">
 
                     <el-form ref="form" label-width="80px">
                         <el-form-item label="通知内容:">
@@ -164,15 +164,15 @@ export default {
 
         //显示表格中的申请信息
         visibleApplicationData() {
-            const startIndexApplication = (this.currentPage_Application - 1) * this.pageSize_Application;
-            const endIndexApplication = startIndexApplication + this.pageSize_Application;
+            const startIndexApplication = (this.currentPageApplication - 1) * this.pageSizeApplication;
+            const endIndexApplication = startIndexApplication + this.pageSizeApplication;
             return this.tableApplicationData.slice(startIndexApplication, endIndexApplication);
         },
 
         //显示表格中的通知信息
         visibleNoticeData() {
-            const startIndexNotice = (this.currentPage_Notice - 1) * this.pageSize_Notice;
-            const endIndexNotice = startIndexNotice + this.pageSize_Notice;
+            const startIndexNotice = (this.currentPageNotice - 1) * this.pageSizeNotice;
+            const endIndexNotice = startIndexNotice + this.pageSizeNotice;
             return this.tableNoticeData.slice(startIndexNotice, endIndexNotice);
         }
     },
@@ -180,21 +180,21 @@ export default {
     data() {
         return {
             //实现界面切换的数据（乐手申请界面 和 全局通知界面）
-            page_one: "",
-            page_two: "",
+            submenuFirst: "",
+            submenuSecond: "",
 
-            OnePage: 0,
-            TwoPage: 0,
+            firstPageChosen: 0,
+            secondPageChosen: 0,
 
             //实现申请换页的数据
-            pageSize_Application: 20,
-            currentPage_Application: 1,
+            pageSizeApplication: 20,
+            currentPageApplication: 1,
 
             //实现通知换页的数据
-            pageSize_Notice: 20,
-            currentPage_Notice: 1,
+            pageSizeNotice: 20,
+            currentPageNotice: 1,
 
-            NoticeEditFlag: false,
+            noticeEditFlag: false,
             dialogVisible: false,
 
             videoUrl: '',
@@ -206,8 +206,8 @@ export default {
 
             collapseBtnClass: 'el-icon-s-fold',
             isCollapse: false,
-            sidewidth: "200",
-            logotextshow: true,
+            sideWidth: "200",
+            logoTexthow: true,
 
             helpCreateNotice: {
                 content: "",
@@ -237,6 +237,9 @@ export default {
 
     created() {
         this.currentUser = JSON.parse(localStorage.getItem('loginuser'));
+        this.handleGetMusicApplication();
+        this.handleGetNoticeGlobal();
+
     },
 
     methods: {
@@ -249,33 +252,31 @@ export default {
 
         //实现申请换页的方法
         handleSizeChangeApplication(size) {
-            this.pageSize_Application = size;
+            this.pageSizeApplication = size;
         },
 
         handleCurrentChangeApplication(val) {
-            this.currentPage_Application = val;
+            this.currentPageApplication = val;
             console.log(val);
         },
 
 
         //实现通知换页的方法
         handleSizeChangeNotice(size) {
-            this.pageSize_Notice = size;
+            this.pageSizeNotice = size;
         },
 
         handleCurrentChangeNotice(val) {
-            this.currentPage_Notice = val;
+            this.currentPageNotice = val;
             console.log(val);
         },
 
         clickNoticeGlobal() {
-            this.page_one = "通知管理";
-            this.page_two = "全局通知";
+            this.submenuFirst = "通知管理";
+            this.submenuSecond = "全局通知";
 
-            this.OnePage = 1;
-            this.TwoPage = 0;
-            // this.ThreePage = 1;
-
+            this.firstPageChosen = 1;
+            this.secondPageChosen = 0;
 
             // 对获取的数据按照 timestamp 属性进行降序排序
             this.tableNoticeData.sort((a, b) => {
@@ -284,11 +285,11 @@ export default {
         },
 
         clickApplicationMusic() {
-            this.page_one = "申请管理";
-            this.page_two = "乐手申请";
+            this.submenuFirst = "申请管理";
+            this.submenuSecond = "乐手申请";
 
-            this.OnePage = 0;
-            this.TwoPage = 1;
+            this.firstPageChosen = 0;
+            this.secondPageChosen = 1;
             // this.ThreePage = 1;
 
 
@@ -300,7 +301,8 @@ export default {
 
         clickCreateNoticeTrue() {
             if (this.helpCreateNotice.content) {
-                this.NoticeEditFlag = false;
+                this.noticeEditFlag = false;
+                this.handleCreateNoticeGlobal();
                 this.helpCreateNotice.content = null;
 
                 this.$message({
@@ -317,7 +319,7 @@ export default {
         clickCreateNoticeFalse() {
             this.helpCreateNotice.content = null;
 
-            this.NoticeEditFlag = false;
+            this.noticeEditFlag = false;
 
             this.$message.error('通知未发布');
 
@@ -345,14 +347,14 @@ export default {
         collapse() {//点击收缩按钮触发
             this.isCollapse = !this.isCollapse
             if (this.isCollapse) {//收缩
-                this.sidewidth = 64
+                this.sideWidth = 64
                 this.collapseBtnClass = 'el-icon-s-unfold'
-                this.logotextshow = false
+                this.logoTexthow = false
             }
             else {//展开
-                this.sidewidth = "200"
+                this.sideWidth = "200"
                 this.collapseBtnClass = 'el-icon-s-fold'
-                this.logotextshow = true
+                this.logoTexthow = true
             }
         },
 
@@ -375,7 +377,7 @@ export default {
         },
 
 
-        createNoticeGlobal() {
+        handleCreateNoticeGlobal() {
             createNoticeGlobal({
                 content: this.helpCreateNotice.content,
                 category: this.helpCreateNotice.category,
@@ -395,7 +397,7 @@ export default {
         },
 
 
-        getMusicApplication() {
+        handleGetMusicApplication() {
             getMusicApplication().then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
@@ -413,7 +415,7 @@ export default {
         },
 
 
-        reviewMusicApplication() {
+        handleReviewMusicApplication() {
             reviewMusicApplication({
                 application_id: this.helpReviewApplication.applicationId,
                 agree: this.helpReviewApplication.agree,
