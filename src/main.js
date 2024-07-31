@@ -22,18 +22,20 @@ Vue.use(VueVideoPlayer)
 
 // 路由 beforeEach 钩子，用于处理认证
 router.beforeEach((to, from, next) => {
-  if (to.meta.needlogin) { // 检查路由是否需要登录
+  if (to.meta.needLogin) { // 检查路由是否需要登录
     console.log('访问需要登录')
-    if (auth.getuserInfo()) { // 检查 cookie 中是否有用户信息
-      console.log(auth.getuserInfo())
+    // 检查 cookie 中是否有用户信息
+    if (auth.getUserInfo()) { 
       console.log('在 cookie 中找到了用户信息')
       next()
     } else {
       console.log('在 cookie 中没有找到用户信息')
-      next({ path: '/login' }) // 如果没有用户信息，重定向到登录页面
+      // 如果没有用户信息，重定向到登录页面
+      next({ path: '/login' }) 
     }
   } else {
-    next() // 如果不需要登录，则继续访问该路由
+    // 如果不需要登录，则继续访问该路由
+    next() 
   }
 })
 

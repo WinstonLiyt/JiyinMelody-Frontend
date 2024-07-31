@@ -10,7 +10,7 @@ const routes = [
         name: "home",
         component: home,
         meta: {
-            needlogin: true,
+            needLogin: true,
         },
     },
     {
