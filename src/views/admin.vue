@@ -28,7 +28,6 @@
 
                         <el-menu-item-group>
                             <template slot="title">待处理</template>
-                            <!-- <el-menu-item index="2-1" @click="Click_applicationAdmin">管理员申请</el-menu-item> -->
                             <el-menu-item index="2-1" @click="Click_applicationMusic">乐手申请</el-menu-item>
 
                         </el-menu-item-group>
@@ -58,7 +57,7 @@
                         </div>
 
 
-                        <el-table :data="visible_NoticeData" stripe header-cell-class-name="headerb-g-c">
+                        <el-table :data="visibleNoticeData" stripe header-cell-class-name="headerb-g-c">
                             <el-table-column prop="id" label="通知id" width="140">
                             </el-table-column>
 
@@ -75,19 +74,15 @@
 
                         <div style="padding: 10px 0;">
                             <el-pagination :page-sizes="[5, 10, 15, 20]" :page-size="pageSize_Notice"
-                                layout="total, sizes, prev, pager, next, jumper" :total="table_NoticeData.length"
+                                layout="total, sizes, prev, pager, next, jumper" :total="tableNoticeData.length"
                                 @size-change="handleSizeChange_Notice" @current-change="handleCurrentChange_Notice">
                             </el-pagination>
                         </div>
                     </div>
 
                     <div v-if="TwoPage" style="margin-top: 50px;">
-                        <!-- <div style="margin: 10px 0;">
-                        <el-input style="width: 220px; margin-left: 25px" placeholder="请输入id" suffix-icon="el-icon-user-solid"></el-input>
-                        <el-button style="margin-left: 25px;" type="primary">搜索</el-button>
-                    </div> -->
 
-                        <el-table :data="visible_ApplicationData" stripe header-cell-class-name="headerb-g-c"
+                        <el-table :data="visibleApplicationData" stripe header-cell-class-name="headerb-g-c"
                             :default-sort="{ prop: 'id', order: 'descending' }">
                             <el-table-column prop="id" label="id" width="140">
                             </el-table-column>
@@ -118,7 +113,7 @@
 
                         <div style="padding: 10px 0;">
                             <el-pagination :page-sizes="[5, 10, 15, 20]" :page-size="pageSize_Application"
-                                layout="total, sizes, prev, pager, next, jumper" :total="table_ApplicationData.length"
+                                layout="total, sizes, prev, pager, next, jumper" :total="tableApplicationData.length"
                                 @size-change="handleSizeChange_Application"
                                 @current-change="handleCurrentChange_Application">
 
@@ -133,7 +128,7 @@
 
                     <el-form ref="form" label-width="80px">
                         <el-form-item label="通知内容:">
-                            <el-input type="textarea" v-model="help_create_notice.content"></el-input>
+                            <el-input type="textarea" v-model="helpCreateNotice.content"></el-input>
                         </el-form-item>
 
                     </el-form>
@@ -168,32 +163,28 @@ export default {
     computed: {
 
         //显示表格中的申请信息
-        visible_ApplicationData() {
-            const startIndex_Application = (this.currentPage_Application - 1) * this.pageSize_Application;
-            const endIndex_Application = startIndex_Application + this.pageSize_Application;
-            return this.table_ApplicationData.slice(startIndex_Application, endIndex_Application);
+        visibleApplicationData() {
+            const startIndexApplication = (this.currentPage_Application - 1) * this.pageSize_Application;
+            const endIndexApplication = startIndexApplication + this.pageSize_Application;
+            return this.tableApplicationData.slice(startIndexApplication, endIndexApplication);
         },
 
         //显示表格中的通知信息
-        visible_NoticeData() {
-            const startIndex_Notice = (this.currentPage_Notice - 1) * this.pageSize_Notice;
-            const endIndex_Notice = startIndex_Notice + this.pageSize_Notice;
-            return this.table_NoticeData.slice(startIndex_Notice, endIndex_Notice);
+        visibleNoticeData() {
+            const startIndexNotice = (this.currentPage_Notice - 1) * this.pageSize_Notice;
+            const endIndexNotice = startIndexNotice + this.pageSize_Notice;
+            return this.tableNoticeData.slice(startIndexNotice, endIndexNotice);
         }
     },
 
     data() {
         return {
-
-
             //实现界面切换的数据（乐手申请界面 和 全局通知界面）
             page_one: "",
             page_two: "",
 
             OnePage: 0,
             TwoPage: 0,
-            // ThreePage: 0,
-
 
             //实现申请换页的数据
             pageSize_Application: 20,
@@ -208,38 +199,30 @@ export default {
 
             videoUrl: '',
 
-
-
-
             //当前用户的信息
-            current_user: {
+            currentUser: {
 
             },
-
 
             collapseBtnClass: 'el-icon-s-fold',
             isCollapse: false,
             sidewidth: "200",
             logotextshow: true,
 
-
-            help_create_notice: {
+            helpCreateNotice: {
                 content: "",
                 category: "全局通知",
             },
 
-
-            help_review_Application: {
-                application_id: 0,
+            helpReviewApplication: {
+                applicationId: 0,
                 agree: 0,
             },
 
-
-            table_ApplicationData: [
+            tableApplicationData: [
             ],
 
-
-            table_NoticeData: [
+            tableNoticeData: [
             ],
 
         }
@@ -253,9 +236,7 @@ export default {
 
 
     created() {
-        this.current_user = JSON.parse(localStorage.getItem('loginuser'));
-        this.Get_MusicApplication();
-        this.Get_NoticeGlobal();
+        this.currentUser = JSON.parse(localStorage.getItem('loginuser'));
     },
 
     methods: {
@@ -267,27 +248,27 @@ export default {
 
 
         //实现申请换页的方法
-        handleSizeChange_Application(size) {
+        handleSizeChangeApplication(size) {
             this.pageSize_Application = size;
         },
 
-        handleCurrentChange_Application(val) {
+        handleCurrentChangeApplication(val) {
             this.currentPage_Application = val;
             console.log(val);
         },
 
 
         //实现通知换页的方法
-        handleSizeChange_Notice(size) {
+        handleSizeChangeNotice(size) {
             this.pageSize_Notice = size;
         },
 
-        handleCurrentChange_Notice(val) {
+        handleCurrentChangeNotice(val) {
             this.currentPage_Notice = val;
             console.log(val);
         },
 
-        Click_noticeGlobal() {
+        clickNoticeGlobal() {
             this.page_one = "通知管理";
             this.page_two = "全局通知";
 
@@ -297,12 +278,12 @@ export default {
 
 
             // 对获取的数据按照 timestamp 属性进行降序排序
-            this.table_NoticeData.sort((a, b) => {
+            this.tableNoticeData.sort((a, b) => {
                 return b.timestamp - a.timestamp;
             });
         },
 
-        Click_applicationMusic() {
+        clickApplicationMusic() {
             this.page_one = "申请管理";
             this.page_two = "乐手申请";
 
@@ -311,18 +292,16 @@ export default {
             // this.ThreePage = 1;
 
 
-            this.table_ApplicationData.sort((a, b) => {
+            this.tableApplicationData.sort((a, b) => {
                 return a.id - b.id;
             });
 
         },
 
-        Click_createNotice_True() {
-            if (this.help_create_notice.content) {
+        clickCreateNoticeTrue() {
+            if (this.helpCreateNotice.content) {
                 this.NoticeEditFlag = false;
-                this.Create_NoticeGlobal();
-
-                this.help_create_notice.content = null;
+                this.helpCreateNotice.content = null;
 
                 this.$message({
                     message: '通知已发布',
@@ -335,8 +314,8 @@ export default {
             }
         },
 
-        Click_createNotice_False() {
-            this.help_create_notice.content = null;
+        clickCreateNoticeFalse() {
+            this.helpCreateNotice.content = null;
 
             this.NoticeEditFlag = false;
 
@@ -345,20 +324,20 @@ export default {
             //创建通知成功提示
         },
 
-        approve_application(row) {
-            this.help_review_Application.application_id = row.id;
-            this.help_review_Application.agree = true;
-            console.log(this.help_review_Application.application_id);
-            console.log(this.help_review_Application.agree);
+        approveApplication(row) {
+            this.helpReviewApplication.applicationId = row.id;
+            this.helpReviewApplication.agree = true;
+            console.log(this.helpReviewApplication.applicationId);
+            console.log(this.helpReviewApplication.agree);
 
             this.Review_MusicApplication();
         },
 
-        reject_application(row) {
-            this.help_review_Application.application_id = row.id;
-            this.help_review_Application.agree = false;
-            console.log(this.help_review_Application.application_id);
-            console.log(this.help_review_Application.agree);
+        rejectApplication(row) {
+            this.helpReviewApplication.applicationId = row.id;
+            this.helpReviewApplication.agree = false;
+            console.log(this.helpReviewApplication.applicationId);
+            console.log(this.helpReviewApplication.agree);
 
             this.Review_MusicApplication();
         },
@@ -378,11 +357,11 @@ export default {
         },
 
         //接口函数
-        Get_NoticeGlobal() {
+        getNoticeGlobal() {
             getNoticeGlobal().then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
-                    this.table_NoticeData = response.data.data.notices;
+                    this.tableNoticeData = response.data.data.notices;
                     console.log("boke")
                 } else {
                     // 获取音乐家列表失败，显示失败消息
@@ -396,10 +375,10 @@ export default {
         },
 
 
-        Create_NoticeGlobal() {
+        createNoticeGlobal() {
             createNoticeGlobal({
-                content: this.help_create_notice.content,
-                category: this.help_create_notice.category,
+                content: this.helpCreateNotice.content,
+                category: this.helpCreateNotice.category,
             }).then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
@@ -416,11 +395,11 @@ export default {
         },
 
 
-        Get_MusicApplication() {
+        getMusicApplication() {
             getMusicApplication().then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
-                    this.table_ApplicationData = response.data.data.applications;
+                    this.tableApplicationData = response.data.data.applications;
                     console.log("boke")
                 } else {
                     // 获取音乐家列表失败，显示失败消息
@@ -434,10 +413,10 @@ export default {
         },
 
 
-        Review_MusicApplication() {
+        reviewMusicApplication() {
             reviewMusicApplication({
-                application_id: this.help_review_Application.application_id,
-                agree: this.help_review_Application.agree,
+                application_id: this.helpReviewApplication.applicationId,
+                agree: this.helpReviewApplication.agree,
             }).then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {

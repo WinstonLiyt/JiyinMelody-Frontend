@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 const userInfo = "userInfo"
 
 //获取用户登录信息
-export function getuserInfo() {
+export function getUserInfo() {
   const user = Cookies.get(userInfo)
   if (user) {
     return JSON.parse(user)
