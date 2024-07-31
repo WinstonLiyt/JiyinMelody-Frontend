@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store' // Importing Vuex store
+import store from './store' // 导入 Vuex 的状态管理库
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/global.css'
@@ -13,33 +13,33 @@ import 'video.js/dist/video-js.css'
 import "tailwindcss/tailwind.css"
 import '@fortawesome/fontawesome-free/css/all.css'
 
-// Setup axios on the global instance
+// 在 Vue 的原型上设置 axios 为全局实例
 Vue.prototype.$axios = axios
 
-// Use ElementUI and VueVideoPlayer plugins
+// 使用 ElementUI 和 VueVideoPlayer 插件
 Vue.use(ElementUI)
 Vue.use(VueVideoPlayer)
 
-// Router beforeEach hook to handle authentication
+// 路由 beforeEach 钩子，用于处理认证
 router.beforeEach((to, from, next) => {
-  console.log('Access requires login')
-  if (to.meta.needlogin) { // Check if the route requires login
-    if (auth.getuserInfo()) { // Check if user information is available
+  if (to.meta.needlogin) { // 检查路由是否需要登录
+    console.log('访问需要登录')
+    if (auth.getuserInfo()) { // 检查 cookie 中是否有用户信息
       console.log(auth.getuserInfo())
-      console.log('User information found in cookies')
+      console.log('在 cookie 中找到了用户信息')
       next()
     } else {
-      console.log('No user information in cookies')
-      next({ path: '/login' }) // Redirect to login page if no user information
+      console.log('在 cookie 中没有找到用户信息')
+      next({ path: '/login' }) // 如果没有用户信息，重定向到登录页面
     }
   } else {
-    next() // Continue to the route if login is not required
+    next() // 如果不需要登录，则继续访问该路由
   }
 })
 
-// Create and mount the Vue instance
+
 new Vue({
   router,
-  store, // Use Vuex store
+  store, // 使用 Vuex 状态管理库
   render: h => h(App)
 }).$mount('#app')
