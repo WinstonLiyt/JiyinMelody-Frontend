@@ -1,7 +1,7 @@
 <template>
   <div
-    style="height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color:burlywood">
-    <div style="display :flex; background-color:aliceblue; width:50%; border-radius: 5px; overflow: hidden">
+    style="height: 100vh;display: flex; align-items: center; justify-content: center; background-color:burlywood">
+    <div style="display :flex; background-color:aliceblue;  width:max-content; min-width:50%;border-radius: 5px; overflow: hidden">
       <div style="flex: 1; display: flex">
         <img src="@/assets/register.png" alt="" style="height:100%;width:100%;">
       </div>

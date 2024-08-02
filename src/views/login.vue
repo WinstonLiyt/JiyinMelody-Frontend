@@ -1,7 +1,6 @@
 <template>
-  <div
-    style="height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color:darkcyan">
-    <div style="display :flex; background-color:aliceblue; width:50%; border-radius: 5px; overflow: hidden">
+  <div style="height: 100vh; display: flex; align-items: center; justify-content: center; background-color:darkcyan">
+    <div style="display :flex; background-color:aliceblue; width:max-content; min-width:50%;border-radius: 5px; overflow: hidden">
       <div style="flex: 1; display: flex">
         <img src="@/assets/login.png" alt="" style="height:100%;width:100%;">
       </div>
@@ -20,13 +19,15 @@
             <el-button type="primary" style="width: 100%" @click="login">登录</el-button>
           </el-form-item>
           <div style="display:flex">
-            <div style="flex: 1">还没有账号?去<span style="color:darkcyan; cursor: pointer; text-decoration: underline;"
-                @click="$router.push('/register')">注册</span></div>
-            <div style="flex: 1;text-align: right;"><span
-                style="color:darkcyan; cursor: pointer; text-decoration: underline;"
-                @click="$router.push('/findpass')">忘记密码?</span></div>
+            <div style="flex: 1">还没有账号?去
+              <span style="color:darkcyan; cursor: pointer; text-decoration: underline;"
+                @click="$router.push('/register')">注册</span>
+            </div>
+            <div style="flex: 1;text-align: right;">
+                <span style="color:darkcyan; cursor: pointer; text-decoration: underline;"
+                @click="$router.push('/findpass')">忘记密码?</span>
+            </div>
           </div>
-
         </el-form>
       </div>
     </div>
