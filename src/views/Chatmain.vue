@@ -137,29 +137,31 @@ export default {
     this.fetchFriendsAndGroups();
 
     /* 创建通知管理员 */
-    this.$store.state.notices.push({
-      "id": -1,
-      "nickname": "系统通知",
-      "image_url": "@/assets/default.png",
-      "unread_count": 0,
-    });
-    this.$store.state.notices.push({
-      "id": -2,
-      "nickname": "邀请通知",
-      "image_url": "@/assets/default.png",
-      "unread_count": 0,
-    });
+    if(this.$store.state.notices.length == 0) {
+      this.$store.state.notices.push({
+        "id": -1,
+        "nickname": "系统通知",
+        "image_url": "@/assets/default.png",
+        "unread_count": 0,
+      });
+      this.$store.state.notices.push({
+        "id": -2,
+        "nickname": "邀请通知",
+        "image_url": "@/assets/default.png",
+        "unread_count": 0,
+      });
+    }
 
     this.$store.state.current.id = null;
 
-    // Start polling for new messages and friends/groups
+    // 每5秒poll一次
     this.pollingInterval = setInterval(() => {
       this.fetchMessages();
       this.fetchFriendsAndGroups();
-    }, 5000); // Poll every 5 seconds
+    }, 5000);
   },
   beforeDestroy() {
-    // Clear the polling interval when the component is destroyed
+    // 组件销毁前清除定时器
     clearInterval(this.pollingInterval);
   }
 }
