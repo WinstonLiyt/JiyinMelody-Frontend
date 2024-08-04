@@ -69,7 +69,7 @@ import Contact from '@/components/Contact.vue'
 import { mapState } from 'vuex'
 import { searchfriendchats, searchgroupchats, searchnotices, searchinvitations } from '@/api/interface'
 import { upload } from '@/api/upload.js'
-import { create_group } from '@/api/group_manage.js'
+import { createGroup } from '@/api/group_manage.js'
 import { getgroups } from '@/api/friends.js'
 import default_img from "@/assets/default.png"
 
@@ -283,13 +283,14 @@ export default {
       this.form.groupAvatar = file;
     },
     submitForm() {
+      console.log('提交新建群聊表单')
       upload({
         file: this.form.groupAvatar,
         category: "图像",
         usage: "群组头像",
       }).then(response => {
         const img_id = response.data.data.id;
-        create_group({
+        createGroup({
           name: this.form.groupName,
           description: this.form.groupDescription,
           image_file_id: img_id,
@@ -299,7 +300,7 @@ export default {
           console.error(error);
         });
       }).catch(error => {
-        console.error(error);
+        console.error('群组头像上传失败', error);
       });
 
       this.dialogVisible = false;
