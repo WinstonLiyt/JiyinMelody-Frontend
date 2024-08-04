@@ -157,7 +157,7 @@ export function upload(data) {
  * @param {Object} data - The data for creating a group
  * @returns {Promise} - Axios request promise
  */
-export function create_group(data) {
+export function createGroup(data) {
   const headers = getAuthHeaders();
   return request({
     url: '/relation/group/create/',
