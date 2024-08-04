@@ -28,10 +28,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    searchfriendchats(context, payload) {
+    searchFriendChats(context, payload) {
       // Implement the action
     },
-    searchgroupchats(context, payload) {
+    searchGroupChats(context, payload) {
       // Implement the action
     }
   }

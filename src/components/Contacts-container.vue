@@ -67,7 +67,7 @@
 <script>
 import Contact from '@/components/Contact.vue'
 import { mapState } from 'vuex'
-import { searchfriendchats, searchgroupchats, searchnotices, searchinvitations } from '@/api/interface'
+import { searchFriendChats, searchGroupChats, searchNotices, searchInvitations } from '@/api/interface'
 import { upload } from '@/api/upload.js'
 import { createGroup } from '@/api/group_manage.js'
 import { getgroups } from '@/api/friends.js'
@@ -130,7 +130,7 @@ export default {
       item.unread_count = 0;
     },
     setfriendChat(id, name, img_url) {
-      searchfriendchats({ user_id: id }).then(res => {
+      searchFriendChats({ user_id: id }).then(res => {
         this.user = JSON.parse(localStorage.getItem('loginuser'));
         this.$store.state.nameToDisplay = name;
         this.$store.state.messagesToDisplay = [];
@@ -174,7 +174,7 @@ export default {
       });
     },
     setgroupChat(id, name, img_url) {
-      searchgroupchats({ group_id: id }).then(res => {
+      searchGroupChats({ group_id: id }).then(res => {
         this.user = JSON.parse(localStorage.getItem('loginuser'));
         this.$store.state.nameToDisplay = name;
         this.$store.state.messagesToDisplay = [];
@@ -219,7 +219,7 @@ export default {
     },
     setnoticeChat(id, name, img_url) {
       if (id === -1) {
-        searchnotices().then(res => {
+        searchNotices().then(res => {
           this.user = JSON.parse(localStorage.getItem('loginuser'));
           this.$store.state.nameToDisplay = name;
           this.$store.state.messagesToDisplay = [];
@@ -247,7 +247,7 @@ export default {
           console.log(err);
         });
       } else if (id === -2) {
-        searchinvitations().then(res => {
+        searchInvitations().then(res => {
           this.user = JSON.parse(localStorage.getItem('loginuser'));
           this.$store.state.nameToDisplay = name;
           this.$store.state.messagesToDisplay = [];
@@ -283,7 +283,8 @@ export default {
       this.form.groupAvatar = file;
     },
     submitForm() {
-      console.log('提交新建群聊表单')
+      let that = this
+      console.log('提交新建群聊表单')      
       upload({
         file: this.form.groupAvatar,
         category: "图像",
@@ -300,6 +301,7 @@ export default {
           console.error(error);
         });
       }).catch(error => {
+        that.$message.error('群组头像上传失败，群组创建失败')
         console.error('群组头像上传失败', error);
       });
 
@@ -327,6 +329,6 @@ export default {
 
 <style>
 input[type="radio"]:checked + label {
-  @apply bg-gray-200; /* Adjust as needed */
+  @apply bg-gray-200;
 }
 </style>
