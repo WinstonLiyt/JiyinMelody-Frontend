@@ -20,7 +20,7 @@ function getAuthHeaders() {
  * @param {Object} data - The data for querying friend chat records
  * @returns {Promise} - Axios request promise
  */
-export function searchfriendchats(data) {
+export function searchFriendChats(data) {
   const headers = getAuthHeaders();
   return request({
     url: '/interact/chat/list_friend/',
@@ -35,7 +35,7 @@ export function searchfriendchats(data) {
  * @param {Object} data - The data for querying group chat records
  * @returns {Promise} - Axios request promise
  */
-export function searchgroupchats(data) {
+export function searchGroupChats(data) {
   const headers = getAuthHeaders();
   return request({
     url: '/interact/chat/list_group/',
@@ -49,7 +49,7 @@ export function searchgroupchats(data) {
  * Search notices
  * @returns {Promise} - Axios request promise
  */
-export function searchnotices() {
+export function searchNotices() {
   const headers = getAuthHeaders();
   return request({
     url: '/notice/list_normal/',
@@ -92,7 +92,7 @@ export function sendgroupchats(data) {
  * Search invitations
  * @returns {Promise} - Axios request promise
  */
-export function searchinvitations() {
+export function searchInvitations() {
   const headers = getAuthHeaders();
   return request({
     url: '/interact/invitation/list/',

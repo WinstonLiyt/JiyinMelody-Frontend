@@ -13,7 +13,7 @@ import Contacts_Container from '@/components/Contacts-container.vue';
 import mainheader from '@/components/mainheader.vue';
 import Chat from '@/components/Chat.vue';
 import { getfriends, getgroups } from '@/api/friends';
-import { searchfriendchats, searchgroupchats } from '@/api/interface';
+import { searchFriendChats, searchGroupChats } from '@/api/interface';
 
 export default {
   name: 'Chatmain',
@@ -47,7 +47,7 @@ export default {
     async fetchMessages() {
       if (this.$store.state.current.type === 'friend') {
         try {
-          const response = await searchfriendchats({
+          const response = await searchFriendChats({
             user_id: this.$store.state.current.id
           });
           const newMessages = response.data.data.chats;
@@ -57,7 +57,7 @@ export default {
         }
       } else if (this.$store.state.current.type === 'group') {
         try {
-          const response = await searchgroupchats({
+          const response = await searchGroupChats({
             group_id: this.$store.state.current.id
           });
           const newMessages = response.data.data.chats;
