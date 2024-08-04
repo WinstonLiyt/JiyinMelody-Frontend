@@ -283,7 +283,8 @@ export default {
       this.form.groupAvatar = file;
     },
     submitForm() {
-      console.log('提交新建群聊表单')
+      let that = this
+      console.log('提交新建群聊表单')      
       upload({
         file: this.form.groupAvatar,
         category: "图像",
@@ -300,6 +301,7 @@ export default {
           console.error(error);
         });
       }).catch(error => {
+        that.$message.error('群组头像上传失败，群组创建失败')
         console.error('群组头像上传失败', error);
       });
 
