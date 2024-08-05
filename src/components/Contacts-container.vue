@@ -69,7 +69,7 @@ import Contact from '@/components/Contact.vue'
 import { mapState } from 'vuex'
 import { searchFriendChats, searchGroupChats, searchNotices, searchInvitations } from '@/api/interface'
 import { upload } from '@/api/upload.js'
-import { createGroup } from '@/api/group_manage.js'
+import { createGroup } from '@/api/groupManage.js'
 import { getgroups } from '@/api/friends.js'
 import default_img from "@/assets/default.png"
 
