@@ -52,7 +52,7 @@ export default {
       this.user = JSON.parse(localStorage.getItem('loginuser'));
       return this.$store.state.current.type === 'friend'
         ? { name: 'OtherView', params: { id: this.$store.state.current.id } }
-        : { name: 'group_manage', params: { groupid: this.$store.state.current.id } };
+        : { name: 'groupManage', params: { groupid: this.$store.state.current.id } };
     },
   },
   methods: {

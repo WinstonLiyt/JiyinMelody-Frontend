@@ -85,8 +85,8 @@ const routes = [
     //群聊管理
     {
         path: "/group/:groupid",
-        name: "group_manage",
-        component: () => import("../views/group_manage.vue"),
+        name: "groupManage",
+        component: () => import("../views/groupManage.vue"),
         props: true,
     },
     {

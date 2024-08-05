@@ -7,7 +7,6 @@
         </el-header>
 
 
-
         <div class="parent-container">
             <div class="centered-container">
                 <div class="container">
@@ -44,12 +43,6 @@
                                 <div class="name">{{ item.nickname }} <span v-if="index == 0" class="Group-dot"></span>
                                 </div>
                             </div>
-
-                            <!-- <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
-                                <li v-for="i in count" class="infinite-list-item">{{ i }}</li>
-                            </ul> -->
-
-
 
                         </div>
                         <div class="btn_options">
@@ -136,7 +129,6 @@
             <span slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="Click_AddUser_True">确 定</el-button>
                 <el-button @click="Click_AddUser_False">取 消</el-button>
-                <!-- <el-button @click="AddUserFlag = false, form_addUser.id = fo_user.id, form_addUser.nickname = fo_user.nickname">取 消</el-button> -->
             </span>
 
         </el-dialog>
@@ -156,22 +148,19 @@
             <span slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="Click_DeleteUser_True">确 定</el-button>
                 <el-button @click="Click_DeleteUser_False">取 消</el-button>
-                <!-- <el-button @click="DeleteUserFlag = false, form_deleteUser.id = fo_user.id, form_deleteUser.nickname = fo_user.nickname">取 消</el-button> -->
             </span>
-
         </el-dialog>
-
 
     </div>
 </template>
 
 <script>
 import * as auth from "../utils/auth";
-import { getGroupInfo, getAllFriend, UpdateGroupInfo, AddGroupUser, DeleteGroupUser, DeleteGroup, ExitGroup, upload } from "@/api/group_manage";
+import { getGroupInfo, getAllFriend, UpdateGroupInfo, AddGroupUser, DeleteGroupUser, DeleteGroup, ExitGroup, upload } from "@/api/groupManage";
 
 export default {
 
-    name: "group_manage",
+    name: "groupManage",
     props: ['groupid'],
 
     data() {
