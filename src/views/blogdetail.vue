@@ -207,27 +207,7 @@ export default {
       total: 0,
       comment: "",
       comm_comment: "",
-      blog: {
-        "id": 99,
-        "author": {
-          "id": 21,
-          "nickname": "扎克",
-          "image_url": "//game.gtimg.cn/images/lol/act/img/champion/Zac.png"
-        },
-        "title": "电子舞曲+大触打击乐永远的神",
-        "content": "今天听了听电子舞曲+大触打击乐，巨好听，撼动了高能流行+迪斯科在我心中的地位",
-        "video_url": null,
-        "music_url": null,
-        "timestamp": "1972-10-14 21:04:40",
-        "tags": [
-          "电子舞曲", "大触打击乐"
-        ],
-        "is_liked": true,
-        "like_count": 200,
-        "is_collected": true,
-        "collect_count": 47,
-        "comment_count": 4
-      },
+      blog:{},
       blogs: [
 
       ],

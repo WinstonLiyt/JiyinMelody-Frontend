@@ -57,7 +57,7 @@ const routes = [
     {
         path: "/Chatmain",
         name: "Chatmain",
-        component: () => import("../views/chatMain.vue"),
+        component: () => import("../views/ChatMain.vue"),
     },
     {
         path: "/activities",
