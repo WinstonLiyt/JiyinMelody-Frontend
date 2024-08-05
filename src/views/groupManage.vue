@@ -221,7 +221,6 @@ export default {
             },
 
 
-
             imageUrl: "",
 
 
@@ -391,9 +390,6 @@ export default {
                 if (response.data.code === 200) {
                     this.group = response.data.data;
                     this.groupUser = response.data.data.members;
-                    console.log("boke")
-                    console.log(this.group)
-                    console.log(this.groupUser)
                 } else {
                     // 获取博客列表失败，显示失败消息
                     this.$message.error(response.data.msg);
@@ -412,8 +408,6 @@ export default {
                 console.log(response.data);
                 if (response.data.code === 200) {
                     this.friends = response.data.data.friends;
-                    console.log("boke")
-                    console.log(this.newUsers)
                 } else {
                     // 获取朋友失败，显示失败消息
                     this.$message.error(response.data.msg);
