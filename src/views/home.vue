@@ -29,8 +29,8 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    goToChatmain() {
-      this.$router.push({ name: 'Chatmain' });
+    goTochatMain() {
+      this.$router.push({ name: 'chatMain' });
     },
     logout() {
       auth.removeuserInfo();

@@ -10,7 +10,7 @@
           background-color="#1e80ff" text-color="#fff" active-text-color="#ffd04b">
           <el-menu-item index="1" @click="$router.push('/blogs')">帖子</el-menu-item>
           <el-menu-item index="2" @click="$router.push('/activities')">活动</el-menu-item>
-          <el-menu-item index="3" @click="$router.push('/Chatmain')">聊天</el-menu-item>
+          <el-menu-item index="3" @click="$router.push('/chatMain')">聊天</el-menu-item>
           <el-menu-item index="4" @click="$router.push('/admin')" v-if="user.is_staff">管理员</el-menu-item>
         </el-menu>
       </div>
@@ -129,7 +129,7 @@ export default {
         this.activeIndex = "1";
       } else if (path.startsWith('/activities')) {
         this.activeIndex = "2";
-      } else if (path.startsWith('/Chatmain')) {
+      } else if (path.startsWith('/chatMain')) {
         this.activeIndex = "3";
       } else if (path.startsWith('/admin')) {
         this.activeIndex = "4";

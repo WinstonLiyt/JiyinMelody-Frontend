@@ -16,7 +16,7 @@ import { getfriends, getgroups } from '@/api/friends';
 import { searchFriendChats, searchGroupChats } from '@/api/interface';
 
 export default {
-  name: 'Chatmain',
+  name: 'chatMain',
   components: {
     Contacts_Container,
     Chat,
