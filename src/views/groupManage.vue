@@ -27,7 +27,7 @@
 
                     </div>
                     <div class="form-container">
-                        <div class="message_title">简介: <i class="el-icon-edit icon" @click="Click_UpdateInfo"></i></div>
+                        <div class="message_title">简介: <i class="el-icon-edit icon" @click="clickUpdateInfo"></i></div>
                         <div class="message_text">
                             {{ group.description }}
                         </div>
@@ -37,7 +37,7 @@
                 <div class="right_container">
                     <div class="card">
                         <div class="image-container1" style="max-height: 300px; overflow-y: auto;">
-                            <div v-for="(item, index) in Group_users" :key="index" class="image-wrapper">
+                            <div v-for="(item, index) in groupUser" :key="index" class="image-wrapper">
 
                                 <img :src="item.image_url" alt="Default Image" class="rounded-image" />
                                 <div class="name">{{ item.nickname }} <span v-if="index == 0" class="Group-dot"></span>
@@ -46,9 +46,9 @@
 
                         </div>
                         <div class="btn_options">
-                            <img src="@/assets/addhead.jpg" @click="Click_AddUser" alt="Default Image"
+                            <img src="@/assets/addhead.jpg" @click="clickAddUser" alt="Default Image"
                                 class="rounded-image" />
-                            <img v-if="group.is_owner === true" src="@/assets/minus.png" @click="Click_DeleteUser"
+                            <img v-if="group.is_owner === true" src="@/assets/minus.png" @click="clickDeleteUser"
                                 alt="Default Image" class="rounded-image" />
                         </div>
                         <div class="back">
@@ -59,7 +59,7 @@
                                 align-items: center;
                                 margin-top: 20px;
                             ">
-                                <el-button style="margin-top: 20px;" type="danger" @click="delete_exit"> {{ group.is_owner
+                                <el-button style="margin-top: 20px;" type="danger" @click="handleDeleteExit"> {{ group.is_owner
                                     === true ? '解散群聊' : '退出群聊' }}</el-button>
 
                             </div>
@@ -82,13 +82,12 @@
         <el-backtop></el-backtop>
 
 
-        <el-dialog title="修改群信息" :visible.sync="GroupEditFlag" width="30%">
+        <el-dialog title="修改群信息" :visible.sync="groupEditFlag" width="30%">
 
             <el-form ref="form" label-width="80px">
                 <el-form-item label="新的群名:">
-                    <el-input v-model="Edit_group.new_name"></el-input>
+                    <el-input v-model="editGroup.new_name"></el-input>
                 </el-form-item>
-
 
 
                 <el-form-item label="上传头像" prop="image">
@@ -102,52 +101,51 @@
                 </div>
 
 
-
                 <el-form-item label="新的简介:">
-                    <el-input type="textarea" v-model="Edit_group.new_description"></el-input>
+                    <el-input type="textarea" v-model="editGroup.new_description"></el-input>
                 </el-form-item>
             </el-form>
 
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="Click_UpdateInfo_True">确 定</el-button>
-                <el-button @click="Click_UpdateInfo_False">取 消</el-button>
+                <el-button type="primary" @click="clickUpdateInfoTrue">确 定</el-button>
+                <el-button @click="clickUpdateInfoFalse">取 消</el-button>
             </span>
         </el-dialog>
 
 
-        <el-dialog title="添加群成员" :visible.sync="AddUserFlag" width="30%">
+        <el-dialog title="添加群成员" :visible.sync="addUserFlag" width="30%">
 
             <el-form ref="form" label-width="80px">
                 <el-form-item label="群聊人员">
-                    <el-select v-model="form_addUser.id" placeholder="请选择群聊人员">
-                        <el-option v-for="(item, index) in New_users" :key="index" :label="item.nickname"
+                    <el-select v-model="formAddUser.id" placeholder="请选择群聊人员">
+                        <el-option v-for="(item, index) in newUsers" :key="index" :label="item.nickname"
                             :value="item.id"></el-option>
                     </el-select>
                 </el-form-item>
             </el-form>
 
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="Click_AddUser_True">确 定</el-button>
-                <el-button @click="Click_AddUser_False">取 消</el-button>
+                <el-button type="primary" @click="clickAddUserTrue">确 定</el-button>
+                <el-button @click="clickAddUserFalse">取 消</el-button>
             </span>
 
         </el-dialog>
 
 
-        <el-dialog title="减少人员" :visible.sync="DeleteUserFlag" width="30%">
+        <el-dialog title="减少人员" :visible.sync="deleteUserFlag" width="30%">
 
             <el-form ref="form" label-width="80px">
                 <el-form-item label="群聊人员">
-                    <el-select v-model="form_deleteUser.id" placeholder="请选择群聊人员">
-                        <el-option v-for="(item, index) in Old_users" :key="index" :label="item.nickname"
+                    <el-select v-model="formDeleteUser.id" placeholder="请选择群聊人员">
+                        <el-option v-for="(item, index) in oldUsers" :key="index" :label="item.nickname"
                             :value="item.id"></el-option>
                     </el-select>
                 </el-form-item>
             </el-form>
 
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="Click_DeleteUser_True">确 定</el-button>
-                <el-button @click="Click_DeleteUser_False">取 消</el-button>
+                <el-button type="primary" @click="clickDeleteUserTrue">确 定</el-button>
+                <el-button @click="clickDeleteUserFalse">取 消</el-button>
             </span>
         </el-dialog>
 
@@ -165,11 +163,11 @@ export default {
 
     data() {
         return {
-            GroupEditFlag: false,
+            groupEditFlag: false,
 
-            AddUserFlag: false,
+            addUserFlag: false,
 
-            DeleteUserFlag: false,
+            deleteUserFlag: false,
 
 
             images: [
@@ -181,48 +179,43 @@ export default {
 
             textarea: "测试简介",
 
-            current_user: {
+            currentUser: {
             },
 
             group:
             {
             },
 
-            Friends: [
+            friends: [
             ],
 
-            Group_users: [
+            groupUser: [
             ],
 
 
-            New_users: [
+            newUsers: [
             ],
 
-            Old_users: [
+            oldUsers: [
             ],
 
 
 
             //储存修改的群信息
-            Edit_group: {
+            editGroup: {
                 new_name: "",
                 new_img: "",
                 new_description: "",
             },
 
-            // fo_user: {
-            //     id: "",
-            //     nickname: "",
-            // },
-
             //储存添加的群成员信息
-            form_addUser: {
+            formAddUser: {
                 id: "",
                 nickname: "",
             },
 
             //储存删除的群成员信息
-            form_deleteUser: {
+            formDeleteUser: {
                 id: "",
                 nickname: "",
             },
@@ -241,20 +234,20 @@ export default {
     },
 
     created() {
-        this.current_user = JSON.parse(localStorage.getItem('loginuser'));
-        this.get_GroupInfo();
-        this.get_Fridendlist();
+        this.currentUser = JSON.parse(localStorage.getItem('loginuser'));
+        this.handleGetGroupInfo();
+        this.handleGetFridendlist();
     },
 
 
 
     methods: {
 
-        Update_new_user() {
+        updateNewUser() {
             const newFriend = [];
-            this.Friends.forEach((friend) => {
+            this.friends.forEach((friend) => {
                 let tag = 1;
-                this.Group_users.forEach((member) => {
+                this.groupUser.forEach((member) => {
                     if (friend.id == member.id) {
                         tag = 0;
                     }
@@ -263,42 +256,42 @@ export default {
                     newFriend.push(friend);
             })
 
-            // 更新 New_users 数组  
-            this.New_users = newFriend;
+            // 更新 newUsers 数组  
+            this.newUsers = newFriend;
         },
 
 
-        Update_old_user() {
+        updateOldUser() {
             const newFriend = [];
-            this.Group_users.forEach((Group_user) => {
+            this.groupUser.forEach((Group_user) => {
                 let tag = 1;
-                if (Group_user.id == this.current_user.id) {
+                if (Group_user.id == this.currentUser.id) {
                     tag = 0;
                 }
                 if (tag)
                     newFriend.push(Group_user);
             })
 
-            // 更新 New_users 数组  
-            this.Old_users = newFriend;
+            // 更新 newUsers 数组  
+            this.oldUsers = newFriend;
         },
 
-        Click_UpdateInfo() {
+        clickUpdateInfo() {
             if (this.group.is_owner === true) {
-                this.GroupEditFlag = true;
+                this.groupEditFlag = true;
             }
             else {
                 this.$message.error('这有群主才能修改群信息');
             }
         },
 
-        Click_UpdateInfo_True() {
-            if (this.Edit_group.new_name && this.Edit_group.new_description && this.object.id) {
-                this.GroupEditFlag = false;
-                this.update_GroupInfo();
+        clickUpdateInfoTrue() {
+            if (this.editGroup.new_name && this.editGroup.new_description && this.object.id) {
+                this.groupEditFlag = false;
+                this.handleUpdateGroupInfo();
 
-                this.Edit_group.new_name = null;
-                this.Edit_group.new_description = null;
+                this.editGroup.new_name = null;
+                this.editGroup.new_description = null;
                 this.object.id = null;
 
                 this.$message({
@@ -312,25 +305,25 @@ export default {
 
         },
 
-        Click_UpdateInfo_False() {
-            this.Edit_group.new_name = null;
-            this.Edit_group.new_description = null;
+        clickUpdateInfoFalse() {
+            this.editGroup.new_name = null;
+            this.editGroup.new_description = null;
             this.object.id = null;
-            this.GroupEditFlag = false;
+            this.groupEditFlag = false;
             this.$message.error('群信息未修改');
         },
 
-        Click_AddUser() {
-            this.Update_new_user();
-            this.AddUserFlag = true;
+        clickAddUser() {
+            this.updateNewUser();
+            this.addUserFlag = true;
         },
 
-        Click_AddUser_True() {
-            if (this.form_addUser.id) {
-                this.AddUserFlag = false;
-                this.add_User();
+        clickAddUserTrue() {
+            if (this.formAddUser.id) {
+                this.addUserFlag = false;
+                this.handleAddUser();
 
-                this.form_addUser.id = null;
+                this.formAddUser.id = null;
 
                 this.$message({
                     message: '成功发送邀请',
@@ -343,29 +336,29 @@ export default {
 
         },
 
-        Click_AddUser_False() {
-            this.form_addUser.id = null;
-            this.AddUserFlag = false;
+        clickAddUserFalse() {
+            this.formAddUser.id = null;
+            this.addUserFlag = false;
 
             this.$message.error('未发送邀请');
         },
 
-        Click_DeleteUser() {
-            this.Update_old_user();
+        clickDeleteUser() {
+            this.updateOldUser();
             if (this.group.is_owner === true) {
-                this.DeleteUserFlag = true;
+                this.deleteUserFlag = true;
             }
             else {
                 this.$message.error('你并不是管理员，无法操作');
             }
         },
 
-        Click_DeleteUser_True() {
-            if (this.form_deleteUser.id) {
-                this.DeleteUserFlag = false;
-                this.delete_User();
+        clickDeleteUserTrue() {
+            if (this.formDeleteUser.id) {
+                this.deleteUserFlag = false;
+                this.handleDeleteUser();
 
-                this.form_deleteUser.id = null;
+                this.formDeleteUser.id = null;
 
                 this.$message({
                     message: '已经将其移出群聊',
@@ -377,10 +370,10 @@ export default {
             }
         },
 
-        Click_DeleteUser_False() {
-            this.form_deleteUser.id = null;
+        clickDeleteUserFalse() {
+            this.formDeleteUser.id = null;
 
-            this.DeleteUserFlag = false;
+            this.deleteUserFlag = false;
 
             this.$message.error('操作已取消');
         },
@@ -388,7 +381,7 @@ export default {
 
 
         // 接口函数
-        get_GroupInfo() {
+        handleGetGroupInfo() {
             getGroupInfo(
                 {
                     group_id: this.groupid
@@ -397,10 +390,10 @@ export default {
                 console.log(response.data);
                 if (response.data.code === 200) {
                     this.group = response.data.data;
-                    this.Group_users = response.data.data.members;
+                    this.groupUser = response.data.data.members;
                     console.log("boke")
                     console.log(this.group)
-                    console.log(this.Group_users)
+                    console.log(this.groupUser)
                 } else {
                     // 获取博客列表失败，显示失败消息
                     this.$message.error(response.data.msg);
@@ -414,13 +407,13 @@ export default {
 
 
         // 获得所有的朋友列表
-        get_Fridendlist() {
+        handleGetFridendlist() {
             getAllFriend().then(response => {
                 console.log(response.data);
                 if (response.data.code === 200) {
-                    this.Friends = response.data.data.friends;
+                    this.friends = response.data.data.friends;
                     console.log("boke")
-                    console.log(this.New_users)
+                    console.log(this.newUsers)
                 } else {
                     // 获取朋友失败，显示失败消息
                     this.$message.error(response.data.msg);
@@ -434,12 +427,12 @@ export default {
 
 
         //更新群组的信息
-        update_GroupInfo() {
+        handleUpdateGroupInfo() {
             UpdateGroupInfo(
                 {
                     group_id: this.group.id,
-                    name: this.Edit_group.new_name,
-                    description: this.Edit_group.new_description,
+                    name: this.editGroup.new_name,
+                    description: this.editGroup.new_description,
                     image_file_id: this.object.id
                 }
             ).then(response => {
@@ -462,9 +455,9 @@ export default {
         },
 
 
-        add_User() {
+        handleAddUser() {
             AddGroupUser({
-                user_id: this.form_addUser.id,
+                user_id: this.formAddUser.id,
                 group_id: this.group.id
             }).then(response => {
                 console.log(response.data);
@@ -480,9 +473,9 @@ export default {
                 });
         },
 
-        delete_User() {
+        handleDeleteUser() {
             DeleteGroupUser({
-                user_id: this.form_deleteUser.id,
+                user_id: this.formDeleteUser.id,
                 group_id: this.group.id
             }).then(response => {
                 console.log(response.data);
@@ -498,14 +491,14 @@ export default {
                 });
         },
 
-        delete_exit() {
+        handleDeleteExit() {
             if (this.group.is_owner === true) {
                 this.$confirm('此操作将解散这个群组, 是否继续?', '警告', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.delete_Group();
+                    this.handleDeleteGroup();
                     this.$router.back();
                 }).catch(() => {
                     this.$message({
@@ -521,7 +514,7 @@ export default {
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.exit_Group();
+                    this.handleExitGroup();
                     this.$router.back();
                 }).catch(() => {
                     this.$message({
@@ -533,7 +526,7 @@ export default {
         },
 
 
-        exit_Group() {
+        handleExitGroup() {
             ExitGroup({
                 group_id: this.group.id
             }).then(response => {
@@ -551,7 +544,7 @@ export default {
         },
 
 
-        delete_Group() {
+        handleDeleteGroup() {
             DeleteGroup({
                 group_id: this.group.id
             }).then(response => {
@@ -580,11 +573,11 @@ export default {
         handleFileChange(event) {
             this.selectedfile = event.target.files[0];
             if (this.selectedfile) {
-                this.upload_file();
+                this.uploadFile();
             }
         },
 
-        upload_file() {
+        uploadFile() {
             console.log(this.selectedfile);
             upload({
                 file: this.selectedfile,
