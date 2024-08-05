@@ -13,7 +13,7 @@
               <span style="margin-right: 20px"><i class="el-icon-user"></i> {{ this.blog.author.nickname ||
                 "用户" + this.blog.author.id
               }}</span>
-              <span style="margin-right: 20px"><i class="el-icon-date"></i> {{ this.blog.timestamp }}</span>
+              <span style="margin-right: 20px"><i class="el-icon-date"></i> {{ formatTimestamp(this.blog.timestamp)}}</span>
               <span>
                 <el-tag v-for="item in this.blog.tags" :key="item" type="primary" style="margin-right:5px">{{ item
                 }}</el-tag>
@@ -70,7 +70,7 @@
                       </div>
                       <div style="color: #444; margin-bottom: 10px">{{ item.content }}</div>
                       <div style="color: #888; font-size: 13px; margin-bottom: 10px"><span style="margin-right: 20px">{{
-                        item.timestamp }}</span>
+                        formatTimestamp(item.timestamp) }}</span>
                         <span style="cursor: pointer;" :class="{ 'comment-active': item.isreply }" @click="reply(item)"><i
                             class="el-icon-s-comment"></i>评论</span>
                         <span style="margin-left: 20px; cursor: pointer" @click="deletecomments(item.id)"
@@ -99,7 +99,7 @@
                         </div>
                         <div style="color: #444; margin-bottom: 10px">{{ citem.content }}</div>
                         <div style="color: #888; font-size: 13px; margin-bottom: 10px"><span style="margin-right: 20px">{{
-                          citem.timestamp }}</span>
+                          formatTimestamp(citem.timestamp) }}</span>
                           <span style="cursor: pointer;" :class="{ 'comment-active': citem.isreply }"
                             @click="reply(citem)"><i class="el-icon-s-comment"></i>评论</span>
                           <span style="margin-left: 20px; cursor: pointer" @click="deletecomments(citem.id)"
@@ -507,6 +507,16 @@ export default {
     },
     openshareblog() {
       this.$refs.shareblog.open();
+    },
+    formatTimestamp(timestamp) {
+      const date = new Date(timestamp);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
   }
 }
