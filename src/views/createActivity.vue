@@ -46,29 +46,32 @@
 <script>
 import * as auth from "../utils/auth";
 import { createActivity } from "@/api/activities.js";
-import { upload } from "@/api/upload.js";
 import mainheader from '@/components/mainheader.vue'
 
 export default {
   name: "createActivity",
   data() {
     return {
-      mockuser: {
-        nickname: "安妮",
-        image_url: " //game.gtimg.cn/images/lol/act/img/champion/Annie.png",
-      },
       activity: {
         title: "",
         description: "",
         end_at: null,
       },
       rules: {
-        title: [{ required: true, message: "请输入标题", trigger: "blur" }],
+        title: [
+          { required: true, 
+            message: "请输入标题", 
+            trigger: "blur" }
+        ],
         description: [
-          { required: true, message: "请输入介绍", trigger: "blur" },
+          { required: true, 
+            message: "请输入介绍", 
+            trigger: "blur" },
         ],
         end_at: [
-          { required: true, message: "请选择结束时间", trigger: "blur" },
+          { required: true, 
+            message: "请选择结束时间", 
+            trigger: "blur" },
         ],
       },
       activeIndex: "1",
@@ -84,10 +87,8 @@ export default {
   },
   created() {
     this.user = JSON.parse(localStorage.getItem("loginuser"));
-    //this.gettaglist();
   },
   components: {
-
     mainheader
   },
   beforedestroyed() { },
@@ -115,7 +116,7 @@ export default {
             .then((response) => {
               console.log(response.data);
               const activityid = response.data.data.id;
-              if (response.data.code /*=== 200*/) {
+              if (response.data.code) {
                 this.activityid = response.data.data.id;
                 this.$router.push({
                   name: "activitydetail",
