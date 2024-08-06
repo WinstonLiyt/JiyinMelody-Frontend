@@ -46,17 +46,12 @@
 <script>
 import * as auth from "../utils/auth";
 import { createActivity } from "@/api/activities.js";
-import { upload } from "@/api/upload.js";
 import mainheader from '@/components/mainheader.vue'
 
 export default {
   name: "createActivity",
   data() {
     return {
-      mockuser: {
-        nickname: "安妮",
-        image_url: " //game.gtimg.cn/images/lol/act/img/champion/Annie.png",
-      },
       activity: {
         title: "",
         description: "",
@@ -84,7 +79,6 @@ export default {
   },
   created() {
     this.user = JSON.parse(localStorage.getItem("loginuser"));
-    //this.gettaglist();
   },
   components: {
 
