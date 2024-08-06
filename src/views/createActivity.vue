@@ -58,12 +58,20 @@ export default {
         end_at: null,
       },
       rules: {
-        title: [{ required: true, message: "请输入标题", trigger: "blur" }],
+        title: [
+          { required: true, 
+            message: "请输入标题", 
+            trigger: "blur" }
+        ],
         description: [
-          { required: true, message: "请输入介绍", trigger: "blur" },
+          { required: true, 
+            message: "请输入介绍", 
+            trigger: "blur" },
         ],
         end_at: [
-          { required: true, message: "请选择结束时间", trigger: "blur" },
+          { required: true, 
+            message: "请选择结束时间", 
+            trigger: "blur" },
         ],
       },
       activeIndex: "1",
@@ -81,7 +89,6 @@ export default {
     this.user = JSON.parse(localStorage.getItem("loginuser"));
   },
   components: {
-
     mainheader
   },
   beforedestroyed() { },
@@ -109,7 +116,7 @@ export default {
             .then((response) => {
               console.log(response.data);
               const activityid = response.data.data.id;
-              if (response.data.code /*=== 200*/) {
+              if (response.data.code) {
                 this.activityid = response.data.data.id;
                 this.$router.push({
                   name: "activitydetail",
