@@ -22,7 +22,7 @@
                     <el-tag v-for="(tag, index) in item.tags" :key="index" type="primary" class="blog-tag">{{ tag
                     }}</el-tag>
                     <div>
-                      <el-button type="primary" size="mini" icon="el-icon-edit" @click="editBlog(item.id)">编辑</el-button>
+                      <el-button type="primary" size="mini" icon="el-icon-edit" @click="editBlog(item.id)" style="margin-right: 10px;">编辑</el-button>
                       <el-button type="danger" size="mini" icon="el-icon-delete"
                         @click="deleteBlog(item.id)">删除</el-button>
                     </div>
@@ -120,7 +120,7 @@ export default {
 }
 
 .card {
-  min-height: 80vh;
+  height: 420px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

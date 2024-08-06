@@ -9,7 +9,8 @@
           <!-- Avatar -->
           <div class="avatar-container">
             <div class="avatar">
-              <img :src="user.image_url" alt="User Avatar" />
+              <img src="../assets/default.png" alt="User Avatar" />
+              <!-- <img :src="user.image_url" alt="User Avatar" /> -->
             </div>
           </div>
           <!-- Username -->
@@ -30,7 +31,7 @@
           <div style="margin-top: 40px; margin: 20px;">
             <el-button type="primary" round style="width: 100%; background-color:#5f9592; font-size: 20px"
               @click="$router.push({ name: 'EditView', params: { id: user.id } })">
-              <i class="el-icon-edit">修改个人资料</i>
+              修改个人资料<i class="el-icon-edit el-icon--right"></i>
             </el-button>
           </div>
           <!-- Upload Video Button -->
@@ -40,14 +41,6 @@
               @click="triggerFileInput">
               申请乐手<i class="el-icon-upload el-icon--right"></i>
             </el-button>
-          </div>
-
-          <!-- User Description -->
-          <div>
-            <div class="bordered-div">
-              <h1 class="description">{{ user.description }}</h1>
-              <p>{{ currentTime }}</p>
-            </div>
           </div>
 
           <div style="margin: 20px;">
