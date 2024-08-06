@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <el-empty v-if="total === 0" :image-size="250" description="暂未发表任何新闻"></el-empty>
+        <el-empty v-if="total === 0" :image-size="250" description="收藏内容为空"></el-empty>
       </div>
     </div>
   </div>

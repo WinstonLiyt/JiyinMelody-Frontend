@@ -32,7 +32,7 @@
         </div>
 
         <div>
-          <el-empty v-if="friends.length === 0" :image-size="250" description="没有找到相关用户"></el-empty>
+          <el-empty v-if="friends.length === 0" :image-size="250" description="好友列表为空"></el-empty>
         </div>
 
       </div>
