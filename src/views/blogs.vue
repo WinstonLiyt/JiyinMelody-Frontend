@@ -212,6 +212,7 @@ export default {
 }
 </script>
 
+<style src="@/assets/css/iconfont/iconfont.css" scoped></style>
 
 <style scoped>
 .main-container {
