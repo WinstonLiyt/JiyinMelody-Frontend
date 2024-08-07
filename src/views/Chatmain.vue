@@ -1,7 +1,7 @@
 <template>
-  <div style="width:100%; height:100%">
-    <mainheader />
-    <div class="flex h-screen">
+  <div style="width:100%; height:100vh">
+    <mainheader/>
+    <div class="flex rest-screen">
       <Contacts_Container class="w-1/4 bg-gray-100 overflow-y-auto"></Contacts_Container>
       <Chat class="w-3/4 bg-white overflow-y-auto" ref="chat"></Chat>
     </div>
@@ -170,5 +170,10 @@ export default {
 <style scoped>
 .h-15 {
   height: 60px;
+}
+
+.rest-screen {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 </style>
