@@ -172,4 +172,3 @@ export default {
   height: 60px;
 }
 </style>
-./chatMain.vue./ChatMain.vue./chatMain.vue./chatMain.vue./chatMain.vue./chatMain.vue./chatMain.vue
