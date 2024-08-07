@@ -334,7 +334,7 @@ export default {
 }
 
 .main-content {
-  height: 100%;
+  height: calc(100vh - 60px);
   width: 80%;
   margin: 5px auto;
 }
@@ -373,4 +373,5 @@ export default {
 .activity-title:hover {
   color: #2a60c9;
 }
+
 </style>
