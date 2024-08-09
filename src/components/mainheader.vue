@@ -44,7 +44,7 @@
 
 <script>
 import { getinfo } from '@/api/account.js'
-import { gettags } from '@/api/blogs.js'
+import { getTags } from '@/api/blogs.js'
 import * as auth from '../utils/auth'
 
 export default {
@@ -77,7 +77,7 @@ export default {
       this.$router.push({ name: 'UserView', params: { id: this.user.id } });
     },
     gettaglist() {
-      gettags().then(response => {
+      getTags().then(response => {
         if (response.data.code === 200) {
           this.tags = response.data.data;
           this.tags.push({ name: "全部" });

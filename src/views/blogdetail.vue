@@ -183,7 +183,7 @@
 
 <script>
 import * as auth from '../utils/auth'
-import { getblogs, gettheblog, set_like, set_collect, gettopblogs } from '@/api/blogs.js'
+import { getBlogs, gettheblog, set_like, set_collect, gettopblogs } from '@/api/blogs.js'
 import { getcomments, submitcomments, deletecomments } from '@/api/comment.js'
 import shareblog from '@/components/shareblog.vue'
 import mainheader from '@/components/mainheader.vue'
@@ -283,7 +283,7 @@ export default {
       this.$router.push({ path: '/me' });
     },
     getbloglist() {
-      getblogs().then(response => {
+      getBlogs().then(response => {
         console.log(response.data);
         if (response.data.code /*=== 200*/) {
           this.blogs = response.data.data.blogs;

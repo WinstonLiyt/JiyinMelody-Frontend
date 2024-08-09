@@ -67,7 +67,7 @@ export function deletecomments(data) {
  * Get list of tags
  * @returns {Promise} - Axios request promise
  */
-export function gettags() {
+export function getTags() {
   const headers = getAuthHeaders();
   return request({
     url: '/utils/list_tag/',

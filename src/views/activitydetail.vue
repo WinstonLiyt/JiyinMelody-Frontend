@@ -42,7 +42,7 @@
 
 <script>
 import * as auth from "../utils/auth";
-import { getblogs, gettags } from "@/api/blogs.js";
+import { getBlogs, getTags } from "@/api/blogs.js";
 import { getActivityworks } from "@/api/activities";
 import mainheader from "@/components/mainheader.vue";
 import BlogBox from "@/components/BlogBox.vue";
@@ -89,9 +89,10 @@ export default {
       this.getbloglist();
     },
     getbloglist() {
-      getblogs()
-        .then(response => {
-          if (response.data.code) {
+      getBlogs()
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.code /*=== 200*/) {
             this.blogs = response.data.data.blogs;
           } else {
             this.$message.error(response.data.msg);
