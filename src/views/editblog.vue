@@ -53,7 +53,7 @@
   
 <script>
 import * as auth from '../utils/auth'
-import { gettags, gettheblog, update_blog } from '@/api/blogs.js'
+import { getTags, gettheblog, update_blog } from '@/api/blogs.js'
 import { upload } from '@/api/upload.js'
 import mainheader from '@/components/mainheader.vue'
 
@@ -131,7 +131,7 @@ export default {
       this.$router.push({ path: '/me' });
     },
     gettaglist() {
-      gettags().then(response => {
+      getTags().then(response => {
         console.log(response.data);
 
         if (response.data.code === 200) {

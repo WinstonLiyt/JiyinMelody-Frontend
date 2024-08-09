@@ -50,7 +50,7 @@
 
 <script>
 import * as auth from "../utils/auth";
-import { gettags, createblog } from "@/api/blogs.js";
+import { getTags, createblog } from "@/api/blogs.js";
 import { createWork } from "@/api/activities.js";
 import { upload } from "@/api/upload.js";
 import mainheader from '@/components/mainheader.vue'

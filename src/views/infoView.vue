@@ -115,7 +115,7 @@
 import { getInfoById } from '@/api/account.js'
 import { getmedal } from '@/api/friends.js'
 import { upload, updateUserInfo } from '@/api/upload.js'
-import { gettags } from '@/api/blogs.js'
+import { getTags } from '@/api/blogs.js'
 export default {
   name: "infoView",
   props: {
@@ -202,7 +202,7 @@ export default {
         });
     },
     gettaglist() {
-      gettags().then(response => {
+      getTags().then(response => {
         console.log(response.data);
 
         if (response.data.code === 200) {

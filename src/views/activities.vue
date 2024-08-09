@@ -74,17 +74,6 @@
         </div>
 
         <div style="width: 260px" class="fixed-content">
-          <!-- <div class="card" style="margin-bottom: 10px">
-            <div
-              style="font-size: 20px; font-weight: bold; margin-bottom: 10px"
-            >
-              欢迎您！😊
-            </div>
-            <a href="/createblog" target="_blank"
-              ><div style="color: #666">写下博客记录美好的一天</div></a
-            >
-          </div> -->
-
           <div class="card" style="margin-bottom: 10px">
             <div style="
                 display: flex;
@@ -93,7 +82,7 @@
                 border-bottom: 1px solid #ddd;
               ">
               <div style="font-size: 20px; flex: 1">热门帖子</div>
-              <div style="font-size: 12px; color: #666; cursor: pointer" @click="refreshtop">
+              <div style="font-size: 12px; color: #666; cursor: pointer" @click="refreshTop">
                 <i class="el-icon-refresh"></i> 换一换
               </div>
             </div>
@@ -132,7 +121,7 @@
 
 <script>
 import * as auth from "../utils/auth";
-import { gettags, getblogs } from "@/api/blogs.js";
+import { getTags, getBlogs } from "@/api/blogs.js";
 import { getActivities } from "@/api/activities.js";
 
 import mainheader from "@/components/mainheader.vue";
@@ -177,8 +166,8 @@ export default {
   created() {
     this.user = JSON.parse(localStorage.getItem("loginuser"));
     this.getActivitylist();
-    this.gettaglist();
-    this.getbloglist();
+    this.getTagList();
+    this.getBlogList();
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -222,7 +211,7 @@ export default {
           console.error("请求失败:", error);
         });
     },
-    refreshtop() {
+    refreshTop() {
       const end = this.blogs.length > 10 ? 10 : this.blogs.length;
       this.topstart = this.topend === end ? 0 : this.topstart + 5;
       this.topend = this.topstart + 5 > end ? end : this.topstart + 5;
@@ -253,8 +242,8 @@ export default {
         }
       });
     },
-    getbloglist() {
-      getblogs()
+    getBlogList() {
+      getBlogs()
         .then((response) => {
           console.log(response.data);
           if (response.data.code === 200) {
@@ -272,8 +261,8 @@ export default {
           console.error("请求失败:", error);
         });
     },
-    gettaglist() {
-      gettags()
+    getTagList() {
+      getTags()
         .then((response) => {
           console.log(response.data);
           if (response.data.code === 200) {

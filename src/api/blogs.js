@@ -23,7 +23,7 @@ function getAuthHeaders() {
  * Get list of blogs
  * @returns {Promise} - Axios request promise
  */
-export function getblogs() {
+export function getBlogs() {
   const headers = getAuthHeaders();
   return request({
     url: '/blog/normal/list/',
@@ -49,7 +49,7 @@ export function gettopblogs() {
  * Get list of tags
  * @returns {Promise} - Axios request promise
  */
-export function gettags() {
+export function getTags() {
   const headers = getAuthHeaders();
   return request({
     url: '/utils/list_tag/',
