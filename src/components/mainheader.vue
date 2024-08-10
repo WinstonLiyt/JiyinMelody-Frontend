@@ -8,10 +8,10 @@
       <div class="menu-container">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
           background-color="#1e80ff" text-color="#fff" active-text-color="#ffd04b">
-          <el-menu-item index="1" @click="$router.push('/blogs')">帖子</el-menu-item>
-          <el-menu-item index="2" @click="$router.push('/activities')">活动</el-menu-item>
-          <el-menu-item index="3" @click="$router.push('/chatMain')">聊天</el-menu-item>
-          <el-menu-item index="4" @click="$router.push('/admin')" v-if="user.is_staff">管理员</el-menu-item>
+          <el-menu-item index="1" @click="navigateTo('/blogs')">帖子</el-menu-item>
+          <el-menu-item index="2" @click="navigateTo('/activities')">活动</el-menu-item>
+          <el-menu-item index="3" @click="navigateTo('/chatMain')">聊天</el-menu-item>
+          <el-menu-item index="4" @click="navigateTo('/admin')" v-if="user.is_staff">管理员</el-menu-item>
         </el-menu>
       </div>
       <div class="right-container">
@@ -62,7 +62,13 @@ export default {
     };
   },
   methods: {
-
+	navigateTo(path) {
+	    this.$router.push(path).catch(error => {
+	      if (error.name !== 'NavigationDuplicated') {
+	        throw error;
+	      }
+	    });
+	  },
     handleSelect(key, keyPath) {
       this.activeIndex = key;
       console.log(key, keyPath);
