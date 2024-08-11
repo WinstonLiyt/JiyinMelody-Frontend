@@ -124,42 +124,97 @@ export default {
       return this.$store.state.current.id === contactId;
     }
   },
-  created() {
-    /* 保存当前用户信息至本地 */
-    this.user = JSON.parse(localStorage.getItem('loginuser'));
+  // created() {
+  //   /* 保存当前用户信息至本地 */
+  //   this.user = JSON.parse(localStorage.getItem('loginuser'));
 
-    /* 初始化 */
+  //   /* 初始化 */
+  //   this.$store.state.nameToDisplay = '欢迎来到聊天界面🙂';
+  //   this.$store.state.friends = [];
+  //   this.$store.state.groups = [];
+
+  //   /* 拉取当前用户的全部好友 */
+  //   this.fetchFriendsAndGroups();
+
+  //   /* 创建通知管理员 */
+  //   if(this.$store.state.notices.length == 0) {
+  //     this.$store.state.notices.push({
+  //       "id": -1,
+  //       "nickname": "系统通知",
+  //       "image_url": "@/assets/default.png",
+  //       "unread_count": 0,
+  //     });
+  //     this.$store.state.notices.push({
+  //       "id": -2,
+  //       "nickname": "邀请通知",
+  //       "image_url": "@/assets/default.png",
+  //       "unread_count": 0,
+  //     });
+  //   }
+
+  //   this.$store.state.current.id = null;
+
+  //   // 每5秒poll一次
+  //   this.pollingInterval = setInterval(() => {
+  //     this.fetchMessages();
+  //     this.fetchFriendsAndGroups();
+  //   }, 5000);
+  // },
+  
+  created() {
+    try {
+      const storedUser = JSON.parse(localStorage.getItem('loginuser'));
+      if (storedUser) {
+        this.user = storedUser;
+      } else {
+        this.$message.error('用户信息读取失败');
+        this.$router.push({ path: '/login' });
+      }
+    } catch (error) {
+      console.error('读取用户信息时发生错误:', error);
+      this.$message.error('用户信息解析失败');
+      this.$router.push({ path: '/login' });
+    }
+  
+    // 初始化
     this.$store.state.nameToDisplay = '欢迎来到聊天界面🙂';
     this.$store.state.friends = [];
     this.$store.state.groups = [];
-
-    /* 拉取当前用户的全部好友 */
+  
+    // 拉取当前用户的全部好友和群组
     this.fetchFriendsAndGroups();
-
-    /* 创建通知管理员 */
-    if(this.$store.state.notices.length == 0) {
+  
+    // 创建系统通知和邀请通知
+    if (this.$store.state.notices.length == 0) {
       this.$store.state.notices.push({
-        "id": -1,
-        "nickname": "系统通知",
-        "image_url": "@/assets/default.png",
-        "unread_count": 0,
+        id: -1,
+        nickname: "系统通知",
+        image_url: require('@/assets/default.png'),
+        unread_count: 0,
       });
       this.$store.state.notices.push({
-        "id": -2,
-        "nickname": "邀请通知",
-        "image_url": "@/assets/default.png",
-        "unread_count": 0,
+        id: -2,
+        nickname: "邀请通知",
+        image_url: require('@/assets/default.png'),
+        unread_count: 0,
       });
     }
-
+  
+    // 初始化当前聊天
     this.$store.state.current.id = null;
-
-    // 每5秒poll一次
+  
+    // 每5秒轮询一次
     this.pollingInterval = setInterval(() => {
       this.fetchMessages();
       this.fetchFriendsAndGroups();
     }, 5000);
-  },
+  
+    // 确保在组件销毁时清除定时器
+    this.$once('hook:beforeDestroy', () => {
+      clearInterval(this.pollingInterval);
+    });
+  }
+
   beforeDestroy() {
     // 组件销毁前清除定时器
     clearInterval(this.pollingInterval);
