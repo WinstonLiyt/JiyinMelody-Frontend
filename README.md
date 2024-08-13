@@ -1,290 +1,87 @@
-# Vue-based Front End Development Style Guide
+# How to Run this Project🚀
 
-This document provides coding style guidelines for developing Vue.js applications. It draws inspiration from Google's style guides to ensure consistency, readability, and maintainability.
+## Prerequisites
 
-## Table of Contents
-1. [General Guidelines](#general-guidelines)
-2. [Template Style Guide](#template-style-guide)
-3. [Style (CSS/SCSS) Guide](#style-guide)
-4. [Script (JavaScript) Style Guide](#script-style-guide)
-5. [References](#references)
+Before you begin, ensure you have the following installed:
 
-## General Guidelines
+- [Node.js](https://nodejs.org/) (version 12.x or higher)
+- [npm](https://www.npmjs.com/) (Node Package Manager) or [yarn](https://yarnpkg.com/)
+- **My versions for reference:**
+    - **node -v: v18.20.2**
+    - **npm -v: 10.5.0**
 
-- **Consistency:** Follow a consistent coding style throughout the project.
-- **Readability:** Write code that is easy to read and understand.
-- **Maintainability:** Ensure the code is maintainable and scalable.
-- **Component Organization:** Follow a logical and consistent file structure. Keep each component self-contained.
+## Setting Up the Project
 
-## Template Style Guide
+1. **Clone the Repository**
 
-### Structure and Formatting
+    Clone the project repository from GitHub to your local machine.
 
-- **Indentation:** Use 4 spaces for indentation.
-- **Tags:** Always close tags properly.
-- **Quotes:** Use double quotes for attribute values.
-- **Self-closing tags:** Use self-closing syntax for tags without children.
+    ```bash
+    git clone https://gitlab.com/tj-cs-swe/cs10102302-2024/intelligent-worker/ji_music-frontend
+    cd ji_music-frontend
+    ```
 
-```vue
-<!-- Good -->
-<template>
-  <div class="container">
-    <p class="title">Hello, Vue!</p>
-  </div>
-</template>
+2. **Install Dependencies**
 
-<!-- Bad -->
-<template>
-<div class="container">
-<p class='title'>Hello, Vue!</p>
-</div>
-</template>
-```
+    - **Delete `package-lock.json`:** If it exists, delete the `package-lock.json` file.
+    - **Open Terminal in Project Directory:** Navigate to the project's root directory and open a terminal window (cmd).
+    - **Clear npm Cache:** Sometimes, npm cache issues can cause dependency installation failures. Clear the npm cache to avoid such problems.
 
-### Naming Conventions
+    ```bash
+    npm cache clean --force
+    ```
 
-- **Class Names:** Use lowercase with hyphens for separating words in class names.
-- **Component Names:** Use PascalCase for component names.
+    If you encounter a warning:
 
-```vue
-<!-- Good -->
-<template>
-  <MainContainer></MainContainer>
-</template>
+    ```bash
+    npm ERR! The operation was rejected by your operating system.
+    npm ERR! It's possible that the file was already in use (by a text editor or antivirus),
+    npm ERR! or that you lack permissions to access it.
+    ```
 
-<!-- Bad -->
-<template>
-  <maincontainer></maincontainer>
-</template>
-```
+    Adjust the permissions for the "node_cache" and "node_global" folders in your Node.js installation directory. Right-click on these folders, go to Properties -> Security -> Edit, and set the Users permissions to **Full Control**.
 
-### Comments
+    - **Install Dependencies:** Install the project dependencies using npm.
 
-- **Single-line comments:** Use `<!-- -->` for single-line comments within the template.
+    ```bash
+    npm install
+    ```
 
-```vue
-<!-- Main container view -->
-<template>
-  <div class="main-container"></div>
-</template>
-```
+## Running the Development Server
 
-## Style (CSS/SCSS) Guide
+1. **Start the Development Server**
 
-### Structure and Formatting
+    Start the Vue.js development server. This will compile the project and serve it locally, enabling live reloading when you make changes to the code.
 
-- **Indentation:** Use 2 spaces for indentation.
-- **Selectors:** Prefer class selectors over ID selectors.
-- **Braces:** Place the opening brace on the same line as the selector and the closing brace on a new line.
+    ```bash
+    npm run serve
+    ```
 
-```scss
-/* Good */
-.main-container {
-  display: flex;
-  justify-content: center;
-}
+2. **Open in Browser**
 
-/* Bad */
-.main-container
-{
-  display: flex;
-  justify-content: center;
-}
-```
+    Open your browser and navigate to `http://localhost:8080`. You should see your Vue.js application running.
 
-### Naming Conventions
+## Building for Production
 
-- **Class Names:** Use lowercase with hyphens for separating words.
+1. **Build the Project**
 
-```scss
-/* Good */
-.main-container {
-  display: flex;
-}
+    To create a production-ready build of your Vue.js application, run the build command. This will compile and minify your source code into the `dist` directory.
 
-/* Bad */
-.mainContainer {
-  display: flex;
-}
-```
+    ```bash
+    npm run build
+    # or
+    yarn build
+    ```
 
-### Comments
+2. **Serve the Build**
 
-- **Single-line comments:** Use `/* */` for single-line comments.
-- **Block comments:** Use `/** */` for block comments.
+    You can serve the contents of the `dist` directory using any web server. For testing purposes, you can use a simple HTTP server like `http-server`.
 
-```scss
-/* Main container styles */
-.main-container {
-  display: flex;
-  justify-content: center;
-}
+    ```bash
+    npm install -g http-server
+    http-server dist
+    ```
 
-/**
- * Title styles
- * Used in main container
- */
-.title {
-  font-size: 20px;
-  color: #333;
-}
-```
+3. **Open in Browser**
 
-### Scoped Styles
-
-- **Use Scoped Styles:** Use scoped styles within components to avoid global CSS conflicts.
-
-```vue
-<style scoped>
-.main-container {
-  display: flex;
-  justify-content: center;
-}
-</style>
-```
-
-## Script (JavaScript) Style Guide
-
-### Structure and Formatting
-
-- **Indentation:** Use 2 spaces for indentation.
-- **Semicolons:** Use semicolons to terminate statements.
-- **Quotes:** Use single quotes for strings.
-
-```js
-// Good
-const greeting = 'Hello, Vue!';
-
-// Bad
-const greeting = "Hello, Vue!"
-```
-
-### Naming Conventions
-
-- **Variables:** Use camelCase for variable names.
-- **Functions:** Use camelCase for function names. Use descriptive names that explain what the function does.
-- **Components:** Use PascalCase for component names.
-
-```js
-// Good
-let userName = 'John';
-function fetchUserData() {
-  // ...
-}
-
-// Bad
-let user_name = 'John';
-function fetchuserdata() {
-  // ...
-}
-```
-
-### Comments
-
-- **Single-line comments:** Use `//` for single-line comments.
-- **Block comments:** Use `/** */` for block comments.
-
-```js
-// Fetch user data from API
-function fetchUserData() {
-  // Implementation here
-}
-
-/**
- * Calculate the user's age
- * @param {Date} birthDate - The user's birth date
- * @return {number} The user's age
- */
-function calculateAge(birthDate) {
-  const today = new Date();
-  const age = today.getFullYear() - birthDate.getFullYear();
-  return age;
-}
-```
-
-### Functions and Variables
-
-- **Function Declarations:** Prefer function declarations for named functions.
-
-```js
-// Good
-function fetchUserData() {
-  // Implementation here
-}
-
-// Bad
-const fetchUserData = function() {
-  // Implementation here
-};
-```
-
-- **Variable Declarations:** Use `const` for constants and `let` for variables that will be reassigned.
-
-```js
-// Good
-const apiUrl = 'https://api.example.com/users';
-let userData = null;
-
-// Bad
-var apiUrl = 'https://api.example.com/users';
-userData = null;
-```
-
-### Vue-Specific Guidelines
-
-- **Props:** Use camelCase for prop names in JavaScript and kebab-case when used in templates.
-
-```vue
-<!-- Good -->
-<template>
-  <child-component :user-name="userName"></child-component>
-</template>
-
-<script>
-export default {
-  props: {
-    userName: String
-  }
-}
-</script>
-
-<!-- Bad -->
-<template>
-  <child-component :user_name="userName"></child-component>
-</template>
-
-<script>
-export default {
-  props: {
-    user_name: String
-  }
-}
-</script>
-```
-
-- **Lifecycle Hooks:** Order lifecycle hooks as per the Vue.js documentation for better readability.
-
-```js
-export default {
-  data() {
-    return {
-      // data properties
-    };
-  },
-  created() {
-    // logic
-  },
-  mounted() {
-    // logic
-  },
-  methods: {
-    // methods
-  }
-};
-```
-
-## References
-
-- [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
-- [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html)
-- [Vue.js Style Guide](https://vuejs.org/style-guide/)
+    Open your browser and navigate to the address provided by `http-server`, typically `http://localhost:8080`.
